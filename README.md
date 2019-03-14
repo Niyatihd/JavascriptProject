@@ -57,6 +57,6 @@ Day 3:
  Implement gameover on exceeding stack limit.
  Implement real-time score update.
 
-Weekend
+Weekend:
  Finish styling page.
  Complete MVPs.
