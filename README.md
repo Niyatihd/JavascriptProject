@@ -32,6 +32,7 @@ player.js for user to access blocks and board via input controls.
 scorepanel.js for score display.
 
 MVPs
+
  [] Basic interface with game directions, console, player info, score.
  [] Blocks rotate as per player input.
  [] Block stack limit cause Game Over.
