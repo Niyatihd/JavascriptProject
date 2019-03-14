@@ -34,8 +34,11 @@ scorepanel.js for score display.
 MVPs
 
  [] Basic interface with game directions, console, player info, score.
+ 
  [] Blocks rotate as per player input.
+ 
  [] Block stack limit cause Game Over.
+ 
  [] Window styling and scoreboard.
 
 Development timeline
