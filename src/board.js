@@ -5,10 +5,10 @@ const Tetrad = require('./tetrad');
 
 class Board {
   constructor() {
-    this.rows = 16;
+    this.rows = 20;
     this.columns = 10;
-    this.baseColor = "grey";
-    this.board = Array(16).fill(null).map(() => Array(10).fill(this.baseColor));
+    this.baseColor = "black";
+    this.board = Array(20).fill(null).map(() => Array(10).fill(this.baseColor));
   }
   
   drawBoard() {

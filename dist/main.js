@@ -17275,10 +17275,10 @@ const Tetrad = __webpack_require__(/*! ./tetrad */ "./src/tetrad.js");
 
 class Board {
   constructor() {
-    this.rows = 16;
+    this.rows = 20;
     this.columns = 10;
-    this.baseColor = "grey";
-    this.board = Array(16).fill(null).map(() => Array(10).fill(this.baseColor));
+    this.baseColor = "black";
+    this.board = Array(20).fill(null).map(() => Array(10).fill(this.baseColor));
   }
   
   drawBoard() {
@@ -17329,7 +17329,31 @@ window.newBoard = newBoard;
 window.currtetrad = currtetrad;
 //DELETE
 
+// let radius = 800;
+// let svg = d3.select("body")
+//   .append("svg")
+//   .attr("id", "#dog");
 
+// svg.on("click", function () { 
+//   for (let i = 1; i < 5; ++i) {
+//     let position = d3.mouse(svg.node());
+
+//     let circle = svg.append("circle")
+//       .attr("cx", position[0])
+//       .attr("cy", position[1])
+//       .attr("r", 0)
+//       .style("stroke-width", 5 / (i))
+//       .transition()
+//       .delay(Math.pow(i, 2.5) * 50)
+//       .duration(2000)
+//       .ease('quad-in')
+//       .attr("r", radius)
+//       .style("stroke-opacity", 0)
+//       .each("end", function () {
+//         d3.select(this).remove();
+//       });
+//   }
+// });
 
 /***/ }),
 
@@ -17375,7 +17399,7 @@ class Tetrad {
     for (var i = 0; i < this.currentTetrad.length; i++) {
       for (var j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
-          Util.drawUnitSquare(this.xOffset + j, this.yOffset + i, "grey");
+          Util.drawUnitSquare(this.xOffset + j, this.yOffset + i, "black");
         }
       }
     }
@@ -17415,9 +17439,12 @@ document.addEventListener("keydown", (event) => {
       alert("up");
     break;
     case 40:
-      currtetrad.removePrev();
-      currtetrad.moveDown();
-      currtetrad.drawTetrad();
+    currtetrad.removePrev();
+    currtetrad.moveDown();
+    currtetrad.drawTetrad();
+    // debugger
+    // document.getElementById('dog').click();
+    $('#t-body').trigger("click");
     break;
   }
 });
@@ -17621,26 +17648,30 @@ let c = canvas.getContext('2d');
 
 const Util = {
   drawUnitSquare(xOffset, yOffset, color) {
-    let gridUnitSquare = 25;
+    let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
     c.fillStyle = color;
-    c.strokeStyle = "pink";
+    c.strokeStyle = "#E7BFEC";
+    c.setLineDash([4, 2]);
+    c.lineDashOffset = 4;
     c.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
     // c.clearRect(X, Y, 15, 15);
     // c.strokeRect(X, Y, 25, 25);
   },
   drawUnitSquare2(xOffset, yOffset, color) {
-    let gridUnitSquare = 25;
+    let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
     c.fillStyle = color;
-    c.strokeStyle = "pink";
+    c.strokeStyle = "black";
+    c.setLineDash([4, 2]);
+    c.lineDashOffset = 4;
     c.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
-    c.clearRect(X, Y, 10, 10);
-    c.strokeRect(X, Y, 25, 25);
+    c.clearRect(X, Y, 30, 30);
+    c.strokeRect(X, Y, 30, 30);
   }
 };
 

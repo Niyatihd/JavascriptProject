@@ -3,10 +3,51 @@
 
 <head>
   <title>Getting Started</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
-<body>
-  <canvas width="250" height="400" id="canvas"></canvas>  
+<body id="t-body">
+  <img src="bg1.jpeg" alt="bg">
+  <div class="tetris-canvas">
+    <canvas width="300" height="600" style="border: 5px solid grey" id="canvas"></canvas> 
+  </div>
+  <div id="cat"></div>
+<script type="text/javascript">
+  var r = 400;
+
+  var svg = d3.select("body")
+    .append("svg")
+    .attr("id", "dog");
+
+  var divtoclick = d3.select("#t-body");
+
+  var positionLabel = svg.append("text")
+    .attr("x", 10)
+    .attr("y", 30);
+
+divtoclick.on("click", function () { //<-D
+    for (var i = 1; i < 5; ++i) {
+      var position = d3.mouse(svg.node());
+
+      var circle = svg.append("circle")
+        .attr("cx", 330)
+        .attr("cy", 0)
+        .attr("r", 0)
+        .style("stroke-width", 5 / (i))
+        .transition()
+        .delay(Math.pow(i, 2.5) * 50)
+        .duration(2000)
+        .ease('quad-in')
+        .attr("r", r)
+        .style("stroke-opacity", 0)
+        .each("end", function () {
+          d3.select(this).remove();
+        });
+    }
+  });
+</script>
   <script src="main.js"></script>
 </body>
 

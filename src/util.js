@@ -3,26 +3,30 @@ let c = canvas.getContext('2d');
 
 const Util = {
   drawUnitSquare(xOffset, yOffset, color) {
-    let gridUnitSquare = 25;
+    let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
     c.fillStyle = color;
-    c.strokeStyle = "pink";
+    c.strokeStyle = "#E7BFEC";
+    c.setLineDash([4, 2]);
+    c.lineDashOffset = 4;
     c.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
     // c.clearRect(X, Y, 15, 15);
     // c.strokeRect(X, Y, 25, 25);
   },
   drawUnitSquare2(xOffset, yOffset, color) {
-    let gridUnitSquare = 25;
+    let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
     c.fillStyle = color;
-    c.strokeStyle = "pink";
+    c.strokeStyle = "black";
+    c.setLineDash([4, 2]);
+    c.lineDashOffset = 4;
     c.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
-    c.clearRect(X, Y, 10, 10);
-    c.strokeRect(X, Y, 25, 25);
+    c.clearRect(X, Y, 30, 30);
+    c.strokeRect(X, Y, 30, 30);
   }
 };
 
