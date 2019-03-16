@@ -23,7 +23,7 @@ class Tetrad {
     for (var i = 0; i < this.currentTetrad.length; i++) {
       for (var j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
-          Util.drawUnitSquare2(this.xOffset + j, this.yOffset + i, this.color);
+          Util.drawUnitSquareTetrad(this.xOffset + j, this.yOffset + i, this.color);
         }
       }
     }
@@ -33,7 +33,7 @@ class Tetrad {
     for (var i = 0; i < this.currentTetrad.length; i++) {
       for (var j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
-          Util.drawUnitSquare(this.xOffset + j, this.yOffset + i, "black");
+          Util.drawUnitSquareBoard(this.xOffset + j, this.yOffset + i, "black");
         }
       }
     }
@@ -77,8 +77,8 @@ document.addEventListener("keydown", (event) => {
     currtetrad.moveDown();
     currtetrad.drawTetrad();
     // debugger
-    // document.getElementById('dog').click();
-    $('#t-body').trigger("click");
+    document.getElementById('t-body').click();
+    // $('#t-body').trigger("click");
     break;
   }
 });

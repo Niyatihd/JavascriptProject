@@ -17284,7 +17284,7 @@ class Board {
   drawBoard() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        Util.drawUnitSquare(j, i, this.board[i][j]);
+        Util.drawUnitSquareBoard(j, i, this.board[i][j]);
       }
     }
   }
@@ -17319,8 +17319,6 @@ const currtetrad = new tetrad({
   tetrad: tetradBlocks.iBlock
 });
 
-// const currtetrad = new tetrad({color:"purple"});
-
 newBoard.drawBoard();
 currtetrad.drawTetrad();
 
@@ -17329,31 +17327,6 @@ window.newBoard = newBoard;
 window.currtetrad = currtetrad;
 //DELETE
 
-// let radius = 800;
-// let svg = d3.select("body")
-//   .append("svg")
-//   .attr("id", "#dog");
-
-// svg.on("click", function () { 
-//   for (let i = 1; i < 5; ++i) {
-//     let position = d3.mouse(svg.node());
-
-//     let circle = svg.append("circle")
-//       .attr("cx", position[0])
-//       .attr("cy", position[1])
-//       .attr("r", 0)
-//       .style("stroke-width", 5 / (i))
-//       .transition()
-//       .delay(Math.pow(i, 2.5) * 50)
-//       .duration(2000)
-//       .ease('quad-in')
-//       .attr("r", radius)
-//       .style("stroke-opacity", 0)
-//       .each("end", function () {
-//         d3.select(this).remove();
-//       });
-//   }
-// });
 
 /***/ }),
 
@@ -17389,7 +17362,7 @@ class Tetrad {
     for (var i = 0; i < this.currentTetrad.length; i++) {
       for (var j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
-          Util.drawUnitSquare2(this.xOffset + j, this.yOffset + i, this.color);
+          Util.drawUnitSquareTetrad(this.xOffset + j, this.yOffset + i, this.color);
         }
       }
     }
@@ -17399,7 +17372,7 @@ class Tetrad {
     for (var i = 0; i < this.currentTetrad.length; i++) {
       for (var j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
-          Util.drawUnitSquare(this.xOffset + j, this.yOffset + i, "black");
+          Util.drawUnitSquareBoard(this.xOffset + j, this.yOffset + i, "black");
         }
       }
     }
@@ -17443,8 +17416,8 @@ document.addEventListener("keydown", (event) => {
     currtetrad.moveDown();
     currtetrad.drawTetrad();
     // debugger
-    // document.getElementById('dog').click();
-    $('#t-body').trigger("click");
+    document.getElementById('t-body').click();
+    // $('#t-body').trigger("click");
     break;
   }
 });
@@ -17647,7 +17620,7 @@ let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
 
 const Util = {
-  drawUnitSquare(xOffset, yOffset, color) {
+  drawUnitSquareBoard(xOffset, yOffset, color) {
     let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
@@ -17660,7 +17633,7 @@ const Util = {
     // c.clearRect(X, Y, 15, 15);
     // c.strokeRect(X, Y, 25, 25);
   },
-  drawUnitSquare2(xOffset, yOffset, color) {
+  drawUnitSquareTetrad(xOffset, yOffset, color) {
     let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;

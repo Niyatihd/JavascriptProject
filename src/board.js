@@ -14,7 +14,7 @@ class Board {
   drawBoard() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        Util.drawUnitSquare(j, i, this.board[i][j]);
+        Util.drawUnitSquareBoard(j, i, this.board[i][j]);
       }
     }
   }

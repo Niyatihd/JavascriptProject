@@ -1,7 +1,6 @@
 .tetris-canvas > canvas {
   position: absolute;
   top: 16px;
-  text-align: center;
   left: 40%;
 }
 
@@ -23,15 +22,14 @@ body {
 }
 
 svg {
-  /* cursor: pointer; */
   height: 100%;
   width: 100%;
   position: absolute;
-  top: 530px;
+  top: 531px;
   /* background: blue; */
 }
 
-circle {
+ellipse {
   fill: none;
   stroke: #f7f3f3;
 }

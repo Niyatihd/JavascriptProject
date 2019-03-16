@@ -2,7 +2,7 @@ let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
 
 const Util = {
-  drawUnitSquare(xOffset, yOffset, color) {
+  drawUnitSquareBoard(xOffset, yOffset, color) {
     let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
@@ -15,7 +15,7 @@ const Util = {
     // c.clearRect(X, Y, 15, 15);
     // c.strokeRect(X, Y, 25, 25);
   },
-  drawUnitSquare2(xOffset, yOffset, color) {
+  drawUnitSquareTetrad(xOffset, yOffset, color) {
     let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
