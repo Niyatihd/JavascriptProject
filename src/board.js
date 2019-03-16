@@ -11,10 +11,10 @@ class Board {
     this.board = Array(16).fill(null).map(() => Array(10).fill(this.baseColor));
   }
   
-  drawBoard(c) {
+  drawBoard() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        Util.drawUnitSquare(j, i, this.board[i][j], c);
+        Util.drawUnitSquare(j, i, this.board[i][j]);
       }
     }
   }
