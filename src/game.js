@@ -177,6 +177,9 @@ class Game {
         } else {
           this.stackTetrad();
           this.activeTetrad = new Tetrad();
+          this.tetrad = this.activeTetrad.tetrad;
+          this.currentRotation = this.activeTetrad.currentRotation;
+          this.currentTetrad = this.tetrad[this.currentRotation];
         }
       break;
     }
