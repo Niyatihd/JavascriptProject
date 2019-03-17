@@ -17300,6 +17300,108 @@ module.exports = Board;
 
 /***/ }),
 
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+const Board = __webpack_require__(/*! ./board */ "./src/board.js");
+const Tetrad = __webpack_require__(/*! ./tetrad */ "./src/tetrad.js");
+const tetradBlocks = __webpack_require__(/*! ./tetrad_blocks */ "./src/tetrad_blocks.js");
+
+class Game {
+  constructor() {
+    this.activeTetrad = new Tetrad({
+      color: "black",
+      tetrad: tetradBlocks.uBlock
+    });
+    this.newBoard = new Board();
+    this.tetradMoves = this.tetradMoves.bind(this);
+  }
+
+  render() {
+    this.newBoard.drawBoard();
+    this.activeTetrad.drawTetrad();
+  }
+
+  tetradMoves(e) {
+    e.preventDefault();
+    switch (event.keyCode) {
+      case 37:
+      if (!this.collision(-1, 0)) {
+        this.activeTetrad.removePrev();
+        this.activeTetrad.moveLeft();
+        this.activeTetrad.drawTetrad();
+      }
+        break;
+      case 39:
+      if (!this.collision(1,0)) {
+        this.activeTetrad.removePrev();
+        this.activeTetrad.moveRight();
+        this.activeTetrad.drawTetrad();
+      }
+      break;
+      case 38:
+      this.activeTetrad.removePrev();
+      this.activeTetrad.rotateTetrad();
+      this.activeTetrad.drawTetrad();
+      break;
+      case 40:
+      if (!this.collision(0, 1)) {
+        // debugger
+        this.activeTetrad.removePrev();
+        this.activeTetrad.moveDown();
+        this.activeTetrad.drawTetrad();
+        document.getElementById('t-body').click();
+        }
+        // $('#t-body').trigger("click");
+        break;
+    }
+  }
+  
+  collision(nextX, nextY) {
+    let currPosX = this.activeTetrad.xOffset;
+    let currPosY = this.activeTetrad.yOffset;
+    let cols = this.newBoard.columns;//10
+    let rows = this.newBoard.rows;//20
+
+    for (let i = 0; i < this.activeTetrad.currentTetrad.length; i++) {
+      for (let j = 0; j < this.activeTetrad.currentTetrad.length; j++) {
+        // debugger
+        let nextPosX = currPosX + j + nextX;
+        let nextPosY = currPosY + i + nextY;
+
+        if (!this.activeTetrad.currentTetrad[i][j]) { //check if tetrad cell === 0
+          continue;
+        } else if (nextPosX >= cols || nextPosX < 0 || nextPosY > rows) { //check walls
+          return true;
+        } else if (this.newBoard.board[nextPosY][nextPosX] !== this.newBoard.baseColor) { //check adjacent cell to be empty and on board
+          return true;
+        } 
+      }
+    }
+
+    return false;
+  }
+}
+
+
+// const gameex = new Game();
+// window.gameex = gameex;
+const x = Game.activeTetrad;
+window.x = x;
+module.exports = Game;
+
+//DELETE
+// window.newBoard = newBoard;
+// window.currtetrad = currtetrad;
+//DELETE
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -17308,24 +17410,30 @@ module.exports = Board;
 /***/ (function(module, exports, __webpack_require__) {
 
 const _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-const board = __webpack_require__(/*! ./board */ "./src/board.js");
-const tetrad = __webpack_require__(/*! ./tetrad */ "./src/tetrad.js");
-const tetradBlocks = __webpack_require__(/*! ./tetrad_blocks */ "./src/tetrad_blocks.js");
+const Game = __webpack_require__(/*! ./game */ "./src/game.js");
+// const board = require('./board');
+// const tetrad = require('./tetrad');
+// const tetradBlocks = require("./tetrad_blocks");
 
 
-const newBoard = new board();
-const currtetrad = new tetrad({
-  color: "black",
-  tetrad: tetradBlocks.iBlock
-});
+const newGame = new Game();
+newGame.render();
+document.addEventListener("keydown", newGame.tetradMoves);
 
-newBoard.drawBoard();
-currtetrad.drawTetrad();
+// const newBoard = new board();
+// const currtetrad = new tetrad({
+//   color: "black",
+//   tetrad: tetradBlocks.uBlock
+// });
 
-//DELETE
-window.newBoard = newBoard;
-window.currtetrad = currtetrad;
-//DELETE
+// newBoard.drawBoard();
+// currtetrad.drawTetrad();
+
+// //DELETE
+// window.newBoard = newBoard;
+// window.currtetrad = currtetrad;
+window.newGame = newGame;
+// //DELETE
 
 
 /***/ }),
@@ -17348,8 +17456,9 @@ class Tetrad {
     this.yOffset = 2;
     // this.tetrad = this.getRandomTetrad();//REVISE
     this.tetrad = options.tetrad;
+    this.currentRotation = 0;
     // this.currentTetrad = this.tetrad[1];
-    this.currentTetrad = this.tetrad[0];
+    this.currentTetrad = this.tetrad[this.currentRotation];
   }
 
   getRandomTetrad() {
@@ -17379,7 +17488,9 @@ class Tetrad {
   }
 
   moveRight() {
+    // if (!this.collision(1, 0)) {
     this.xOffset += 1;
+    // }
   }
 
   moveLeft() {
@@ -17389,38 +17500,70 @@ class Tetrad {
   moveDown() {
     this.yOffset += 1;
   }
+
+  rotateTetrad() {
+    this.currentRotation = (this.currentRotation + 1) % this.tetrad.length;
+    this.currentTetrad = this.tetrad[this.currentRotation];
+  }
+
+  // collision(nextX, nextY) {
+  //   let currPosX = this.xOffset;
+  //   let currPosY = this.yOffset;
+  //   let cols = 10; //10
+  //   let rows = 20; //20
+
+  //   for (let i = 0; i < this.currentTetrad.length; i++) {
+  //     for (let j = 0; j < this.currentTetrad.length; j++) {
+  //       let nextPosX = currPosX + j + nextX;
+  //       let nextPosY = currPosY + j + nextY;
+  //       debugger
+  //       if (!this.currentTetrad[i][j]) {
+  //         continue;
+  //       }
+  //        else if ((nextPosX >= cols) || (nextPosX < 0) || (nextPosY >= rows)) { //check walls
+  //         return true;
+  //       } else if (this.currentTetrad[nextPosX][nextPosY] !== "black") { //check adjacent cell to be empty and on board
+  //         return true;
+  //       } 
+  //     }
+  //   }
+
+  //   return false;
+  // }
   
 }
 
 // const currtetrad = new Tetrad({color:"purple", tetrad: tetradBlocks.zBlock});
 // currtetrad.drawTetrad();
 
-document.addEventListener("keydown", (event) => {
-  event.preventDefault();
-  switch (event.keyCode) {
-    case 37:
-      currtetrad.removePrev();
-      currtetrad.moveLeft();
-      currtetrad.drawTetrad();
-    break;
-    case 39:
-      currtetrad.removePrev();
-      currtetrad.moveRight();
-      currtetrad.drawTetrad();
-    break;
-    case 38:
-      alert("up");
-    break;
-    case 40:
-    currtetrad.removePrev();
-    currtetrad.moveDown();
-    currtetrad.drawTetrad();
-    // debugger
-    document.getElementById('t-body').click();
-    // $('#t-body').trigger("click");
-    break;
-  }
-});
+// document.addEventListener("keydown", (event) => {
+//   event.preventDefault();
+//   switch (event.keyCode) {
+//     case 37:
+//       currtetrad.removePrev();
+//       currtetrad.moveLeft();
+//       currtetrad.drawTetrad();
+//     break;
+//     case 39:
+//       currtetrad.removePrev();
+//       currtetrad.moveRight();
+//       currtetrad.drawTetrad();
+//     break;
+//     case 38:
+//       currtetrad.removePrev();
+//       currtetrad.rotateTetrad();
+//       currtetrad.drawTetrad();
+//     break;
+//     case 40:
+//       currtetrad.removePrev();
+//       currtetrad.moveDown();
+//       currtetrad.drawTetrad();
+//     // debugger
+//       document.getElementById('t-body').click();
+//     // $('#t-body').trigger("click");
+//     break;
+//   }
+// });
 
 
 
@@ -17505,6 +17648,28 @@ const Blocks = {zBlock: [
                   [0, 0, 0],
                   [0, 0, 1],
                   [1, 1, 1]
+                ]
+              ],
+              oBlock: [
+                [
+                  [0, 0, 0],
+                  [1, 1, 0],
+                  [1, 1, 0]
+                ],
+                [
+                  [0, 0, 0],
+                  [1, 1, 0],
+                  [1, 1, 0]
+                ],
+                [
+                  [0, 0, 0],
+                  [1, 1, 0],
+                  [1, 1, 0]
+                ],
+                [
+                  [0, 0, 0],
+                  [1, 1, 0],
+                  [1, 1, 0]
                 ]
               ],
               sBlock: [
@@ -17633,6 +17798,7 @@ const Util = {
     // c.clearRect(X, Y, 15, 15);
     // c.strokeRect(X, Y, 25, 25);
   },
+
   drawUnitSquareTetrad(xOffset, yOffset, color) {
     let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;

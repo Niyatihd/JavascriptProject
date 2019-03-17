@@ -1,19 +1,25 @@
 const _ = require("lodash");
-const board = require('./board');
-const tetrad = require('./tetrad');
-const tetradBlocks = require("./tetrad_blocks");
+const Game = require('./game');
+// const board = require('./board');
+// const tetrad = require('./tetrad');
+// const tetradBlocks = require("./tetrad_blocks");
 
 
-const newBoard = new board();
-const currtetrad = new tetrad({
-  color: "black",
-  tetrad: tetradBlocks.iBlock
-});
+const newGame = new Game();
+newGame.render();
+document.addEventListener("keydown", newGame.tetradMoves);
 
-newBoard.drawBoard();
-currtetrad.drawTetrad();
+// const newBoard = new board();
+// const currtetrad = new tetrad({
+//   color: "black",
+//   tetrad: tetradBlocks.uBlock
+// });
 
-//DELETE
-window.newBoard = newBoard;
-window.currtetrad = currtetrad;
-//DELETE
+// newBoard.drawBoard();
+// currtetrad.drawTetrad();
+
+// //DELETE
+// window.newBoard = newBoard;
+// window.currtetrad = currtetrad;
+window.newGame = newGame;
+// //DELETE

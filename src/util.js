@@ -15,6 +15,7 @@ const Util = {
     // c.clearRect(X, Y, 15, 15);
     // c.strokeRect(X, Y, 25, 25);
   },
+
   drawUnitSquareTetrad(xOffset, yOffset, color) {
     let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
