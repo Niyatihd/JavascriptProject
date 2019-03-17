@@ -60,7 +60,7 @@ class Tetrad {
   }
 
   rotateTetradOnCollision() {
-    if (this.xOffset <= 0) {
+    if (this.xOffset < 5) {
       this.moveRight();
     } else {
       this.moveLeft();
