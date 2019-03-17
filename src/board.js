@@ -8,13 +8,13 @@ class Board {
     this.rows = 20;
     this.columns = 10;
     this.baseColor = "black";
-    this.board = Array(20).fill(null).map(() => Array(10).fill(this.baseColor));
+    this.grid = Array(20).fill(null).map(() => Array(10).fill(this.baseColor));
   }
   
   drawBoard() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        Util.drawUnitSquareBoard(j, i, this.board[i][j]);
+        Util.drawUnitSquareBoard(j, i, this.grid[i][j]);
       }
     }
   }

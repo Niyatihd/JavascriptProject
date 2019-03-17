@@ -17278,13 +17278,13 @@ class Board {
     this.rows = 20;
     this.columns = 10;
     this.baseColor = "black";
-    this.board = Array(20).fill(null).map(() => Array(10).fill(this.baseColor));
+    this.grid = Array(20).fill(null).map(() => Array(10).fill(this.baseColor));
   }
   
   drawBoard() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
-        Util.drawUnitSquareBoard(j, i, this.board[i][j]);
+        Util.drawUnitSquareBoard(j, i, this.grid[i][j]);
       }
     }
   }
@@ -17316,7 +17316,7 @@ class Game {
   constructor() {
     this.activeTetrad = new Tetrad({
       color: "black",
-      tetrad: tetradBlocks.uBlock
+      tetrad: tetradBlocks.zBlock
     });
     this.newBoard = new Board();
     this.tetradMoves = this.tetradMoves.bind(this);
@@ -17331,34 +17331,41 @@ class Game {
     e.preventDefault();
     switch (event.keyCode) {
       case 37:
-      if (!this.collision(-1, 0)) {
-        this.activeTetrad.removePrev();
-        this.activeTetrad.moveLeft();
-        this.activeTetrad.drawTetrad();
-      }
-        break;
-      case 39:
-      if (!this.collision(1,0)) {
-        this.activeTetrad.removePrev();
-        this.activeTetrad.moveRight();
-        this.activeTetrad.drawTetrad();
-      }
+        if (!this.collision(-1, 0)) {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.moveLeft();
+          this.activeTetrad.drawTetrad();
+        }
       break;
       case 38:
-      this.activeTetrad.removePrev();
-      this.activeTetrad.rotateTetrad();
-      this.activeTetrad.drawTetrad();
+        if (this.collision(0, 0)) {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.rotateTetradOnCollision();
+          this.activeTetrad.rotateTetrad();
+          this.activeTetrad.drawTetrad();
+        } else {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.rotateTetrad();
+          this.activeTetrad.drawTetrad();
+        }
+      break;
+      case 39:
+        if (!this.collision(1,0)) {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.moveRight();
+          this.activeTetrad.drawTetrad();
+        }
       break;
       case 40:
-      if (!this.collision(0, 1)) {
-        // debugger
-        this.activeTetrad.removePrev();
-        this.activeTetrad.moveDown();
-        this.activeTetrad.drawTetrad();
-        document.getElementById('t-body').click();
+        if (!this.collision(0, 1)) {
+          // debugger
+          this.activeTetrad.removePrev();
+          this.activeTetrad.moveDown();
+          this.activeTetrad.drawTetrad();
+          document.getElementById('t-body').click();
+          // $('#t-body').trigger("click");
         }
-        // $('#t-body').trigger("click");
-        break;
+      break;
     }
   }
   
@@ -17378,7 +17385,7 @@ class Game {
           continue;
         } else if (nextPosX >= cols || nextPosX < 0 || nextPosY > rows) { //check walls
           return true;
-        } else if (this.newBoard.board[nextPosY][nextPosX] !== this.newBoard.baseColor) { //check adjacent cell to be empty and on board
+        } else if (this.newBoard.grid[nextPosY][nextPosX] !== this.newBoard.baseColor) { //check adjacent cell to be empty and on board
           return true;
         } 
       }
@@ -17506,66 +17513,17 @@ class Tetrad {
     this.currentTetrad = this.tetrad[this.currentRotation];
   }
 
-  // collision(nextX, nextY) {
-  //   let currPosX = this.xOffset;
-  //   let currPosY = this.yOffset;
-  //   let cols = 10; //10
-  //   let rows = 20; //20
-
-  //   for (let i = 0; i < this.currentTetrad.length; i++) {
-  //     for (let j = 0; j < this.currentTetrad.length; j++) {
-  //       let nextPosX = currPosX + j + nextX;
-  //       let nextPosY = currPosY + j + nextY;
-  //       debugger
-  //       if (!this.currentTetrad[i][j]) {
-  //         continue;
-  //       }
-  //        else if ((nextPosX >= cols) || (nextPosX < 0) || (nextPosY >= rows)) { //check walls
-  //         return true;
-  //       } else if (this.currentTetrad[nextPosX][nextPosY] !== "black") { //check adjacent cell to be empty and on board
-  //         return true;
-  //       } 
-  //     }
-  //   }
-
-  //   return false;
-  // }
-  
+  rotateTetradOnCollision() {
+    if (this.xOffset <= 0) {
+      this.moveRight();
+    } else {
+      this.moveLeft();
+    }
+  }
 }
 
 // const currtetrad = new Tetrad({color:"purple", tetrad: tetradBlocks.zBlock});
 // currtetrad.drawTetrad();
-
-// document.addEventListener("keydown", (event) => {
-//   event.preventDefault();
-//   switch (event.keyCode) {
-//     case 37:
-//       currtetrad.removePrev();
-//       currtetrad.moveLeft();
-//       currtetrad.drawTetrad();
-//     break;
-//     case 39:
-//       currtetrad.removePrev();
-//       currtetrad.moveRight();
-//       currtetrad.drawTetrad();
-//     break;
-//     case 38:
-//       currtetrad.removePrev();
-//       currtetrad.rotateTetrad();
-//       currtetrad.drawTetrad();
-//     break;
-//     case 40:
-//       currtetrad.removePrev();
-//       currtetrad.moveDown();
-//       currtetrad.drawTetrad();
-//     // debugger
-//       document.getElementById('t-body').click();
-//     // $('#t-body').trigger("click");
-//     break;
-//   }
-// });
-
-
 
 //DELETE
 // window.Tetrad = Tetrad;

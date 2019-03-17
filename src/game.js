@@ -7,7 +7,7 @@ class Game {
   constructor() {
     this.activeTetrad = new Tetrad({
       color: "black",
-      tetrad: tetradBlocks.uBlock
+      tetrad: tetradBlocks.zBlock
     });
     this.newBoard = new Board();
     this.tetradMoves = this.tetradMoves.bind(this);
@@ -22,34 +22,41 @@ class Game {
     e.preventDefault();
     switch (event.keyCode) {
       case 37:
-      if (!this.collision(-1, 0)) {
-        this.activeTetrad.removePrev();
-        this.activeTetrad.moveLeft();
-        this.activeTetrad.drawTetrad();
-      }
-        break;
-      case 39:
-      if (!this.collision(1,0)) {
-        this.activeTetrad.removePrev();
-        this.activeTetrad.moveRight();
-        this.activeTetrad.drawTetrad();
-      }
+        if (!this.collision(-1, 0)) {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.moveLeft();
+          this.activeTetrad.drawTetrad();
+        }
       break;
       case 38:
-      this.activeTetrad.removePrev();
-      this.activeTetrad.rotateTetrad();
-      this.activeTetrad.drawTetrad();
+        if (this.collision(0, 0)) {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.rotateTetradOnCollision();
+          this.activeTetrad.rotateTetrad();
+          this.activeTetrad.drawTetrad();
+        } else {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.rotateTetrad();
+          this.activeTetrad.drawTetrad();
+        }
+      break;
+      case 39:
+        if (!this.collision(1,0)) {
+          this.activeTetrad.removePrev();
+          this.activeTetrad.moveRight();
+          this.activeTetrad.drawTetrad();
+        }
       break;
       case 40:
-      if (!this.collision(0, 1)) {
-        // debugger
-        this.activeTetrad.removePrev();
-        this.activeTetrad.moveDown();
-        this.activeTetrad.drawTetrad();
-        document.getElementById('t-body').click();
+        if (!this.collision(0, 1)) {
+          // debugger
+          this.activeTetrad.removePrev();
+          this.activeTetrad.moveDown();
+          this.activeTetrad.drawTetrad();
+          document.getElementById('t-body').click();
+          // $('#t-body').trigger("click");
         }
-        // $('#t-body').trigger("click");
-        break;
+      break;
     }
   }
   
@@ -69,7 +76,7 @@ class Game {
           continue;
         } else if (nextPosX >= cols || nextPosX < 0 || nextPosY > rows) { //check walls
           return true;
-        } else if (this.newBoard.board[nextPosY][nextPosX] !== this.newBoard.baseColor) { //check adjacent cell to be empty and on board
+        } else if (this.newBoard.grid[nextPosY][nextPosX] !== this.newBoard.baseColor) { //check adjacent cell to be empty and on board
           return true;
         } 
       }
