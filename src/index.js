@@ -5,9 +5,16 @@ const Game = require('./game');
 // const tetradBlocks = require("./tetrad_blocks");
 
 
-const newGame = new Game();
-newGame.render();
-document.addEventListener("keydown", newGame.tetradMoves);
+document.addEventListener("DOMContentLoaded", () => {
+  // const canvasEl = document.getElementsByTagName("canvas")[0];
+  // const ctx = canvasEl.getContext("2d");
+  const newGame = new Game();
+  newGame.render();
+  document.addEventListener("keydown", newGame.tetradMoves);
+  window.newGame = newGame;
+
+});
+
 
 // const newBoard = new board();
 // const currtetrad = new tetrad({
@@ -21,5 +28,5 @@ document.addEventListener("keydown", newGame.tetradMoves);
 // //DELETE
 // window.newBoard = newBoard;
 // window.currtetrad = currtetrad;
-window.newGame = newGame;
+// window.newGame = newGame;
 // //DELETE

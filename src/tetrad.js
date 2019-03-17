@@ -6,9 +6,9 @@ class Tetrad {
   constructor(options={}) {
     this.color = options.color || "yellow";
     this.xOffset = 4;
-    this.yOffset = 2;
-    // this.tetrad = this.getRandomTetrad();//REVISE
-    this.tetrad = options.tetrad;
+    this.yOffset = -3;
+    this.tetrad = this.getRandomTetrad();//REVISE
+    // this.tetrad = options.tetrad;
     this.currentRotation = 0;
     // this.currentTetrad = this.tetrad[1];
     this.currentTetrad = this.tetrad[this.currentRotation];
@@ -17,10 +17,11 @@ class Tetrad {
   getRandomTetrad() {
     let tetrads = Object.keys(tetradBlocks);
     let randomtetrad = tetrads[Math.floor(Math.random() * tetrads.length)];
-    return randomtetrad;
+    return tetradBlocks[randomtetrad];
   }
 
-  drawTetrad() {
+  drawTetrad(currentTetrad) {
+    // debugger
     for (var i = 0; i < this.currentTetrad.length; i++) {
       for (var j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
@@ -54,18 +55,19 @@ class Tetrad {
     this.yOffset += 1;
   }
 
-  rotateTetrad() {
-    this.currentRotation = (this.currentRotation + 1) % this.tetrad.length;
-    this.currentTetrad = this.tetrad[this.currentRotation];
-  }
+  // rotateTetrad() {
+  //   // debugger
+  //   this.currentRotation = (this.currentRotation + 1) % this.tetrad.length;
+  //   this.currentTetrad = this.tetrad[this.currentRotation];
+  // }
 
-  rotateTetradOnCollision() {
-    if (this.xOffset < 5) {
-      this.moveRight();
-    } else {
-      this.moveLeft();
-    }
-  }
+//   rotateTetradOnCollision() {
+//     if (this.xOffset < 5) {
+//       this.moveRight();
+//     } else {
+//       this.moveLeft();
+//     }
+//   }
 }
 
 // const currtetrad = new Tetrad({color:"purple", tetrad: tetradBlocks.zBlock});

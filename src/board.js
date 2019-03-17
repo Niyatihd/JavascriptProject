@@ -18,6 +18,10 @@ class Board {
       }
     }
   }
+
+  drawBoardStack(i, j) {
+    Util.drawUnitSquareTetrad(j, i, this.grid[i][j]);
+  }
 }
 
 module.exports = Board;
