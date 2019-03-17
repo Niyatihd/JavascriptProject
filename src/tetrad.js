@@ -20,7 +20,7 @@ class Tetrad {
     return tetradBlocks[randomtetrad];
   }
 
-  drawTetrad(currentTetrad) {
+  drawTetrad() {
     // debugger
     for (var i = 0; i < this.currentTetrad.length; i++) {
       for (var j = 0; j < this.currentTetrad.length; j++) {
@@ -55,11 +55,11 @@ class Tetrad {
     this.yOffset += 1;
   }
 
-  // rotateTetrad() {
-  //   // debugger
-  //   this.currentRotation = (this.currentRotation + 1) % this.tetrad.length;
-  //   this.currentTetrad = this.tetrad[this.currentRotation];
-  // }
+  rotateTetrad() {
+    // debugger
+    this.currentRotation = (this.currentRotation + 1) % this.tetrad.length;
+    this.currentTetrad = this.tetrad[this.currentRotation];
+  }
 
 //   rotateTetradOnCollision() {
 //     if (this.xOffset < 5) {
