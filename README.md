@@ -1,4 +1,9 @@
+---
+permalink: /index.html
+---
+
 # JavascriptProject
+
 
 Overview
 
