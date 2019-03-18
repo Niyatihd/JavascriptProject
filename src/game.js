@@ -19,10 +19,19 @@ class Game {
     scoreDiv.innerHTML = this.score;
   }
 
+  updateNextTetrad() {
+    // let nextTetradDiv = document.getElementById("next-tetrad");
+    let nextTetrad = this.activeTetrad.tetrad[this.activeTetrad.currentRotation + 1];
+    // nextTetradDiv.innerHTML = nextTetrad;
+
+    Util.drawNextTetrad(nextTetrad);
+  }
+
   render() {
     this.newBoard.drawBoard();
     this.activeTetrad.drawTetrad();
     this.updateScore();
+    this.updateNextTetrad();
     // debugger
     // this.animate();
   }

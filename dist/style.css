@@ -1,10 +1,18 @@
 .main {
   display: flex;
   justify-content: space-around;
+  padding: 20px;
+  flex-flow: wrap;
+}
+.tetris-canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tetris-canvas > canvas {
   display: flex;
+  z-index: -1;
 }
 
 img {
@@ -17,7 +25,7 @@ img {
 #gameDirections {
   width: 100px;
   height: 25px;
-
+  margin-top: 20px;
 }
 
 body {
@@ -29,13 +37,15 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+  height: 100%;
 }
 
 svg {
-  height: 100%;
-  width: 100%;
-  top: 531px;
-  /* background: blue; */
+position: absolute;
+height: 100%;
+width: 100%;
+top: 500px;
+/* background: blue; */
 }
 
 ellipse {
@@ -48,6 +58,19 @@ ellipse {
   height: 200px;
   background: white;
   color: black;
+  margin-bottom: 20px;
+
+}
+
+#next-tetrad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 200px;
+  color: black;
+  margin-top: 20px;
 }
 
 #startGame {
@@ -56,11 +79,22 @@ height: 136px;
 background: powderblue;
 color: black;
 left: 300px;
+padding: 0;
+margin-top: -400px;
 /* margin-top: -400px; */
 }
 
 .left-panel {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-panel {
   display: flex;
   flex-direction: column;
+}
+
+.hide {
+  display: none;
 }

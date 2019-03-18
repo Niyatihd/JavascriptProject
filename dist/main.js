@@ -17362,10 +17362,19 @@ class Game {
     scoreDiv.innerHTML = this.score;
   }
 
+  updateNextTetrad() {
+    // let nextTetradDiv = document.getElementById("next-tetrad");
+    let nextTetrad = this.activeTetrad.tetrad[this.activeTetrad.currentRotation + 1];
+    // nextTetradDiv.innerHTML = nextTetrad;
+
+    Util.drawNextTetrad(nextTetrad);
+  }
+
   render() {
     this.newBoard.drawBoard();
     this.activeTetrad.drawTetrad();
     this.updateScore();
+    this.updateNextTetrad();
     // debugger
     // this.animate();
   }
@@ -17550,19 +17559,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // const canvasEl = document.getElementsByTagName("canvas")[0];
   // const ctx = canvasEl.getContext("2d");
   var button = document.createElement("button");
-  button.innerHTML = "Do Something";
+  button.innerHTML = "Start Game";
   button.id = "startGame";
+  
 
   // 2. Append somewhere
   var body = document.getElementsByClassName("tetris-canvas")[0];
   body.appendChild(button);
-  // var body = document.getElementsByTagName("body")[0];
-  // body.appendChild(button);
 
   // 3. Add event handler
   button.addEventListener("click", function () {
       // alert("did something");
-  
+    document.getElementById('startGame').classList.add('hide');
+
+    // var showNext = document.createElement("div");
+    // showNext.innerHTML = "Next Tetrad";
+    // showNext.id = "next-tetrad";
+    // var nextTetradDiv = document.getElementsByClassName("right-panel")[0];
+    // body.appendChild(nextTetradDiv);
 
     // element.addEventListener("click", function () {
     //   alert("Hello World!");
@@ -17588,6 +17602,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         cancelAnimationFrame(requestAnimationFrame(animate));
       }
+
     }
 
   
@@ -17942,6 +17957,8 @@ module.exports = Blocks;
 
 let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
+let canvasNextTetrad = document.getElementById('canvas-next-tetrad');
+let cN = canvasNextTetrad.getContext('2d');
 
 const Util = {
   drawUnitSquareBoard(xOffset, yOffset, color) {
@@ -17970,6 +17987,20 @@ const Util = {
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.clearRect(X, Y, 30, 30);
     c.strokeRect(X, Y, 30, 30);
+  },
+
+  drawUnitSquareTetradN(xOffset, yOffset, color) {
+    let gridUnitSquare = 30;
+    let X = gridUnitSquare * xOffset;
+    let Y = gridUnitSquare * yOffset;
+    cN.fillStyle = color;
+    cN.strokeStyle = "black";
+    cN.setLineDash([4, 2]);
+    cN.lineDashOffset = 4;
+    cN.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
+    cN.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
+    cN.clearRect(X, Y, 30, 30);
+    cN.strokeRect(X, Y, 30, 30);
   },
 
   // collision(nextX, nextY, activeTetrad, currentTetrad, newBoard) {
@@ -18001,6 +18032,17 @@ const Util = {
 
   //   return false;
   // }
+
+   drawNextTetrad(nextTetrad) {
+     debugger
+     for (var i = 0; i < nextTetrad.length; i++) {
+       for (var j = 0; j < nextTetrad.length; j++) {
+         if (nextTetrad[i][j]) {
+           this.drawUnitSquareTetradN(this.xOffset + j, this.yOffset + i, this.color);
+         }
+       }
+     }
+   }
 };
 
 module.exports = Util;

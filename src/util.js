@@ -1,5 +1,7 @@
 let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
+let canvasNextTetrad = document.getElementById('canvas-next-tetrad');
+let cN = canvasNextTetrad.getContext('2d');
 
 const Util = {
   drawUnitSquareBoard(xOffset, yOffset, color) {
@@ -28,6 +30,20 @@ const Util = {
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.clearRect(X, Y, 30, 30);
     c.strokeRect(X, Y, 30, 30);
+  },
+
+  drawUnitSquareTetradN(xOffset, yOffset, color) {
+    let gridUnitSquare = 30;
+    let X = gridUnitSquare * xOffset;
+    let Y = gridUnitSquare * yOffset;
+    cN.fillStyle = color;
+    cN.strokeStyle = "black";
+    cN.setLineDash([4, 2]);
+    cN.lineDashOffset = 4;
+    cN.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
+    cN.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
+    cN.clearRect(X, Y, 30, 30);
+    cN.strokeRect(X, Y, 30, 30);
   },
 
   // collision(nextX, nextY, activeTetrad, currentTetrad, newBoard) {
@@ -59,6 +75,17 @@ const Util = {
 
   //   return false;
   // }
+
+   drawNextTetrad(nextTetrad) {
+     debugger
+     for (var i = 0; i < nextTetrad.length; i++) {
+       for (var j = 0; j < nextTetrad.length; j++) {
+         if (nextTetrad[i][j]) {
+           this.drawUnitSquareTetradN(this.xOffset + j, this.yOffset + i, this.color);
+         }
+       }
+     }
+   }
 };
 
 module.exports = Util;
