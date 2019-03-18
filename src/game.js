@@ -7,17 +7,24 @@ const Util = require('./util');
 class Game {
   constructor() {
     this.activeTetrad = new Tetrad();
-    // this.tetrad = this.activeTetrad.tetrad;
-    // this.currentRotation = this.activeTetrad.currentRotation;
-    // this.currentTetrad = this.tetrad[this.currentRotation];
     this.newBoard = new Board();
     this.tetradMoves = this.tetradMoves.bind(this);
+    // this.animate = this.animate.bind(this);
     this.gameOver = false;
+    this.score = 0;
+  }
+
+  updateScore() {
+    let scoreDiv = document.getElementById("score");
+    scoreDiv.innerHTML = this.score;
   }
 
   render() {
     this.newBoard.drawBoard();
     this.activeTetrad.drawTetrad();
+    this.updateScore();
+    // debugger
+    // this.animate();
   }
 
   collision(nextX, nextY, currentTetrad) {
@@ -67,8 +74,6 @@ class Game {
       this.activeTetrad.xOffset += shift;
       this.activeTetrad.currentRotation = (this.activeTetrad.currentRotation + 1) % this.activeTetrad.tetrad.length;
       this.activeTetrad.currentTetrad = this.activeTetrad.tetrad[this.activeTetrad.currentRotation];
-      // this.currentTetrad = this.activeTetrad.currentTetrad;
-      // this.currentRotation = this.activeTetrad.currentRotation;
       this.activeTetrad.drawTetrad();
     }
   }
@@ -79,7 +84,7 @@ class Game {
         if (!this.activeTetrad.currentTetrad[i][j]) {
           continue;
         } else if (this.activeTetrad.yOffset + i < 0) {
-          alert("Game Over");
+          // alert("Game Over");
           this.gameOver = true;
           break;
         }
@@ -88,11 +93,51 @@ class Game {
           let idxJ = this.activeTetrad.xOffset + j;
           let idxI = this.activeTetrad.yOffset + i;
           this.newBoard.grid[idxI][idxJ] = "yellow";
-          // this.newBoard.drawBoardStack(idxI, idxJ);
         }
       }
     }
   }
+
+  addEmptyRow() {
+    this.newBoard.grid.unshift(Array(10).fill(this.newBoard.baseColor));
+  }
+
+  rowStackFull() {
+    for (let i = 0; i < this.newBoard.rows; i++) {
+      let rowFull = true;
+      for (let j = 0; j < this.newBoard.columns; j++) {
+        if (this.newBoard.grid[i][j] === this.newBoard.baseColor) {
+          rowFull = false;
+        }
+      }
+      if (rowFull) {
+        $('#t-body').trigger("click");
+        this.newBoard.grid = this.newBoard.grid.slice(0, i).concat(this.newBoard.grid.slice(i + 1));
+        this.addEmptyRow();
+        this.score += 10;
+        // let scoreBoard = document.getElementById("score");
+        this.updateScore(this.score);
+      }
+    }
+  }
+
+    moveDown() {
+      if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
+        // debugger
+        this.activeTetrad.removePrev();
+        // this.activeTetrad.moveDown();
+        this.activeTetrad.yOffset += 1;
+        this.activeTetrad.drawTetrad();
+        // document.getElementById('t-body').click();
+        // $('#t-body').trigger("click");
+      } else {
+        this.stackTetrad();
+        this.rowStackFull();
+        this.newBoard.drawBoard();
+        this.activeTetrad = new Tetrad();
+      }
+    }
+  
 
 
 
@@ -105,9 +150,11 @@ class Game {
           this.activeTetrad.moveLeft();
           this.activeTetrad.drawTetrad();
         }
+        // dropStart = Date.now();
         break;
       case 38:
         this.rotateTetrad1();
+        // dropStart = Date.now();
         break;
       case 39:
         if (!this.collision(1, 0, this.activeTetrad.currentTetrad)) {
@@ -115,21 +162,12 @@ class Game {
           this.activeTetrad.moveRight();
           this.activeTetrad.drawTetrad();
         }
+        // dropStart = Date.now();
         break;
       case 40:
-        if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
-          // debugger
-          this.activeTetrad.removePrev();
-          this.activeTetrad.moveDown();
-          this.activeTetrad.drawTetrad();
-          document.getElementById('t-body').click();
-          // $('#t-body').trigger("click");
-        } else {
-          this.stackTetrad();
-          this.activeTetrad = new Tetrad();
-          // this.tetrad = this.activeTetrad.tetrad;
-          // this.currentRotation = this.activeTetrad.currentRotation;
-          // this.currentTetrad = this.tetrad[this.currentRotation];
+        this.moveDown();
+        if (this.gameOver) {
+          alert("Game Over");
         }
         break;
       }

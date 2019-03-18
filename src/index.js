@@ -8,25 +8,55 @@ const Game = require('./game');
 document.addEventListener("DOMContentLoaded", () => {
   // const canvasEl = document.getElementsByTagName("canvas")[0];
   // const ctx = canvasEl.getContext("2d");
-  const newGame = new Game();
-  newGame.render();
-  document.addEventListener("keydown", newGame.tetradMoves);
+  var button = document.createElement("button");
+  button.innerHTML = "Do Something";
+  button.id = "startGame";
+
+  // 2. Append somewhere
+  var body = document.getElementsByClassName("tetris-canvas")[0];
+  body.appendChild(button);
+  // var body = document.getElementsByTagName("body")[0];
+  // body.appendChild(button);
+
+  // 3. Add event handler
+  button.addEventListener("click", function () {
+      // alert("did something");
+  
+
+    // element.addEventListener("click", function () {
+    //   alert("Hello World!");
+    
+    const newGame = new Game();
+    // let button = document.getElementById("gameStart");
+    // button.onclick();
+    newGame.render();
+    document.addEventListener("keydown", newGame.tetradMoves);
+
+    let start = Date.now();
+    let gameOver = false;
+
+    function animate() {
+      let now = Date.now();
+      let timeDelta = now - start;
+      if (timeDelta > 750) {
+        newGame.moveDown();
+        start = Date.now();
+      }
+      if (!gameOver) {
+        requestAnimationFrame(animate);
+      } else {
+        cancelAnimationFrame(requestAnimationFrame(animate));
+      }
+    }
+
+  
+    window.requestAnimationFrame(animate);
+  //DELETE
   window.newGame = newGame;
+  //DELETE
+  });
+//  });
 
-});
+ });
 
 
-// const newBoard = new board();
-// const currtetrad = new tetrad({
-//   color: "black",
-//   tetrad: tetradBlocks.uBlock
-// });
-
-// newBoard.drawBoard();
-// currtetrad.drawTetrad();
-
-// //DELETE
-// window.newBoard = newBoard;
-// window.currtetrad = currtetrad;
-// window.newGame = newGame;
-// //DELETE

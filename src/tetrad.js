@@ -12,6 +12,7 @@ class Tetrad {
     this.currentRotation = 0;
     // this.currentTetrad = this.tetrad[1];
     this.currentTetrad = this.tetrad[this.currentRotation];
+    // this.moveDown = this.moveDown.bind(this);
   }
 
   getRandomTetrad() {
@@ -51,8 +52,28 @@ class Tetrad {
     this.xOffset -= 1;
   }
 
-  moveDown() {
-    this.yOffset += 1;
+//   moveDown() {
+//     if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
+//       // debugger
+//       this.activeTetrad.removePrev();
+//       // this.activeTetrad.moveDown();
+//       this.yOffset += 1;
+//       this.activeTetrad.drawTetrad();
+//       // document.getElementById('t-body').click();
+//       // $('#t-body').trigger("click");
+//     } else {
+//       this.stackTetrad();
+//       this.rowStackFull();
+//       this.newBoard.drawBoard();
+//       this.activeTetrad = new Tetrad();
+//     }
+// }
+
+  updateTimer(deltaTime, callback) {
+    this.timer += deltaTime;
+    if (this.timer > this.interval) {
+      this.moveDown(callback);
+    }
   }
 
   rotateTetrad() {
