@@ -28,6 +28,13 @@ img {
   margin-top: 20px;
 }
 
+#gameDirections-text {
+  background: white;
+  width: 300px;
+  height: 200px;
+  margin-top: 20px;
+}
+
 body {
   padding: 0;
   border: none;

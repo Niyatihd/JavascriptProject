@@ -17555,6 +17555,82 @@ module.exports = Game;
 
 /***/ }),
 
+/***/ "./src/how_to_play.js":
+/*!****************************!*\
+  !*** ./src/how_to_play.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+let steps = [
+              "OBJECTIVE– Use your physical and mental skills at clearing as many lines as possible.",
+              "CLEAR LINES– Move the tetraminoes and drop them on each other like completing a puzzle to fill all the blocks in one line.",
+              "NEXT TETRAD– It will show you the upcoming tetrad so you can plan your current and next move at the same time.",
+              "SCORE POINTS– Score points by clearing as many lines as possible before game is over.",
+              "GAME OVER– If the stack of tetrominoes touches the ceiling you 're toast!",
+              "DIRECTION - Use the arrow keys to move and rotate the tetrominoes.",
+              "UP Key - Rotates the tetrominoes.",
+              "RIGTH Key - Moves the tetrominoes right.",
+              "LEFT Key - Moves the tetrominoes left.",
+              "DOWN Key - Moves the tetrominoes down.",
+            ];
+
+// for (let i = 0; i < steps.length; i++) {
+//   let step = steps[i];
+//   let ul = document.getElementById("friendsList");
+//   let li = document.createElement('li');
+//   li.appendChild(document.createTextNode(name));
+//   ul.appendChild(li);
+// }
+
+
+
+function display() {
+  let element = document.getElementById("gameDirections");
+  let clicked = false;
+  let count = 0;
+  let instructions = document.createElement("div");
+  instructions.innerHTML = "Game Directions";
+  instructions.id = "gameDirections-text";
+  let ul = document.createElement('ul');
+  instructions.appendChild(ul);
+  
+  for (let i = 0; i < steps.length; i++) {
+    let step = steps[i];
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(step));
+    ul.appendChild(li);
+  }
+
+  // instructionstText.innerHTML = "Game Directions";
+  // instructions.id = "gameDirections-text";
+  // debugger
+
+   // 3. Add event handler
+  element.addEventListener("click", function () {
+    // debugger
+    if (count > 0) {
+      document.getElementById('gameDirections-text').classList.remove('hide');
+    }
+
+    if (!clicked) {
+      let leftPanel = document.getElementsByClassName("left-panel")[0];
+      leftPanel.appendChild(instructions);
+      clicked = true;
+      count += 1;
+    } else {
+      document.getElementById('gameDirections-text').classList.add('hide');
+      clicked = false;
+      count += 1;
+    }
+  });
+  
+}
+
+module.exports = display;
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -17564,21 +17640,23 @@ module.exports = Game;
 
 const _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 const Game = __webpack_require__(/*! ./game */ "./src/game.js");
+const display = __webpack_require__(/*! ./how_to_play */ "./src/how_to_play.js");
 // const board = require('./board');
 // const tetrad = require('./tetrad');
 // const tetradBlocks = require("./tetrad_blocks");
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  display();
   // const canvasEl = document.getElementsByTagName("canvas")[0];
   // const ctx = canvasEl.getContext("2d");
-  var button = document.createElement("button");
+  let button = document.createElement("button");
   button.innerHTML = "Start Game";
   button.id = "startGame";
   
 
   // 2. Append somewhere
-  var body = document.getElementsByClassName("tetris-canvas")[0];
+  let body = document.getElementsByClassName("tetris-canvas")[0];
   body.appendChild(button);
 
   // 3. Add event handler
@@ -17586,10 +17664,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // alert("did something");
     document.getElementById('startGame').classList.add('hide');
 
-    // var showNext = document.createElement("div");
+    // let showNext = document.createElement("div");
     // showNext.innerHTML = "Next Tetrad";
     // showNext.id = "next-tetrad";
-    // var nextTetradDiv = document.getElementsByClassName("right-panel")[0];
+    // let nextTetradDiv = document.getElementsByClassName("right-panel")[0];
     // body.appendChild(nextTetradDiv);
 
     // element.addEventListener("click", function () {
@@ -17605,7 +17683,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", newGame.tetradMoves);
 
     let start = Date.now();
-    let gameOver = false;
+    // let gameOver = false;
 
     function animate() {
       let now = Date.now();
