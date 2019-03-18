@@ -16,21 +16,29 @@ class Game {
 
   updateScore() {
     let scoreDiv = document.getElementById("score");
-    scoreDiv.innerHTML = this.score;
+    scoreDiv.innerHTML = "Score: " + this.score;
   }
 
   updateNextTetrad() {
     // let nextTetradDiv = document.getElementById("next-tetrad");
-    let nextTetrad = this.activeTetrad.tetrad[this.activeTetrad.currentRotation + 1];
+    let nextTetrad = Tetrad.randomTetrads[Tetrad.randomTetrads.length - 1][0];
     // nextTetradDiv.innerHTML = nextTetrad;
-
     Util.drawNextTetrad(nextTetrad);
+  }
+
+  removeNextTetrad() {
+    // let nextTetradDiv = document.getElementById("next-tetrad");
+    // let nextTetrad = Tetrad.randomTetrads[Tetrad.randomTetrads.length - 1][0];
+    // nextTetradDiv.innerHTML = nextTetrad;
+    Util.undrawNextTetrad();
   }
 
   render() {
     this.newBoard.drawBoard();
     this.activeTetrad.drawTetrad();
+    // debugger
     this.updateScore();
+    this.removeNextTetrad();
     this.updateNextTetrad();
     // debugger
     // this.animate();
@@ -88,6 +96,8 @@ class Game {
   }
 
   stackTetrad() {
+    // this.removeNextTetrad();
+    // this.updateNextTetrad();
     for (let i = 0; i < this.activeTetrad.currentTetrad.length; i++) {
       for (let j = 0; j < this.activeTetrad.currentTetrad.length; j++) {
         if (!this.activeTetrad.currentTetrad[i][j]) {
@@ -102,6 +112,8 @@ class Game {
           let idxJ = this.activeTetrad.xOffset + j;
           let idxI = this.activeTetrad.yOffset + i;
           this.newBoard.grid[idxI][idxJ] = "yellow";
+          // this.removeNextTetrad();
+          // this.updateNextTetrad();
         }
       }
     }
@@ -131,6 +143,8 @@ class Game {
   }
 
     moveDown() {
+      this.removeNextTetrad();
+      this.updateNextTetrad();
       if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
         // debugger
         this.activeTetrad.removePrev();

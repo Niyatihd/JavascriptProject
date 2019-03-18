@@ -32,6 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //   alert("Hello World!");
     
     const newGame = new Game();
+    //DELETE
+      window.newGame = newGame;
+    //DELETE
     // let button = document.getElementById("gameStart");
     // button.onclick();
     newGame.render();
@@ -47,21 +50,21 @@ document.addEventListener("DOMContentLoaded", () => {
         newGame.moveDown();
         start = Date.now();
       }
-      if (!gameOver) {
+      // debugger
+      if (!newGame.gameOver) {
         requestAnimationFrame(animate);
       } else {
         cancelAnimationFrame(requestAnimationFrame(animate));
+        alert("Game Over!");
       }
 
     }
 
   
     window.requestAnimationFrame(animate);
-  //DELETE
-  window.newGame = newGame;
-  //DELETE
   });
-//  });
+  //  });
+  
 
  });
 

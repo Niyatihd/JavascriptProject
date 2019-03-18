@@ -32,7 +32,7 @@ const Util = {
     c.strokeRect(X, Y, 30, 30);
   },
 
-  drawUnitSquareTetradN(xOffset, yOffset, color) {
+  drawUnitSquareTetradU(xOffset, yOffset, color) {
     let gridUnitSquare = 30;
     let X = gridUnitSquare * xOffset;
     let Y = gridUnitSquare * yOffset;
@@ -46,43 +46,36 @@ const Util = {
     cN.strokeRect(X, Y, 30, 30);
   },
 
-  // collision(nextX, nextY, activeTetrad, currentTetrad, newBoard) {
-  //   let currPosX = activeTetrad.xOffset;
-  //   let currPosY = activeTetrad.yOffset;
-  //   let cols = newBoard.columns; //10
-  //   let rows = newBoard.rows; //20
-
-  //   for (let i = 0; i < currentTetrad.length; i++) {
-  //     for (let j = 0; j < currentTetrad.length; j++) {
-  //       let nextPosX = currPosX + j + nextX;
-  //       let nextPosY = currPosY + i + nextY;
-
-  //       if (!currentTetrad[i][j]) { //check if tetrad cell === 0
-  //         continue;
-  //       } 
-  //       if (nextPosY < 0) { 
-  //         continue;
-  //       } 
-
-  //       if (nextPosX >= cols || nextPosX < 0 || nextPosY >= rows) { //check walls
-  //         return true;
-  //       } 
-  //       if (newBoard.grid[nextPosY][nextPosX] !== newBoard.baseColor) { //check adjacent cell to be empty and on board
-  //         return true;
-  //       }
-  //     }
-  //   }
-
-  //   return false;
-  // }
+  drawUnitSquareTetradN(xOffset, yOffset, color) {
+    let gridUnitSquare = 30;
+    let X = gridUnitSquare * xOffset;
+    let Y = gridUnitSquare * yOffset;
+    cN.fillStyle = color;
+    cN.strokeStyle = "black";
+    cN.setLineDash([4, 2]);
+    cN.lineDashOffset = 4;
+    cN.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
+    cN.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
+    // cN.clearRect(X, Y, 30, 30);
+    // cN.strokeRect(X, Y, 30, 30);
+  },
 
    drawNextTetrad(nextTetrad) {
-     debugger
-     for (var i = 0; i < nextTetrad.length; i++) {
-       for (var j = 0; j < nextTetrad.length; j++) {
+     for (let i = 0; i < nextTetrad.length; i++) {
+       for (let j = 0; j < nextTetrad.length; j++) {
+        //  debugger
          if (nextTetrad[i][j]) {
-           this.drawUnitSquareTetradN(this.xOffset + j, this.yOffset + i, this.color);
+           this.drawUnitSquareTetradN(j, i, "yellow");
          }
+       }
+     }
+   },
+
+   undrawNextTetrad() {
+     for (let i = 0; i < 4; i++) {
+       for (let j = 0; j < 4; j++) {
+        //  debugger
+           this.drawUnitSquareTetradU(j, i, "black");
        }
      }
    }

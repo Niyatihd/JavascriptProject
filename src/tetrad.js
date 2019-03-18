@@ -7,7 +7,9 @@ class Tetrad {
     this.color = options.color || "yellow";
     this.xOffset = 4;
     this.yOffset = -3;
-    this.tetrad = this.getRandomTetrad();//REVISE
+    // this.randomTetrads = [];
+    // this.nexttetrad = this.getNextTetrad();
+    this.tetrad = this.getNextTetrad();
     // this.tetrad = options.tetrad;
     this.currentRotation = 0;
     // this.currentTetrad = this.tetrad[1];
@@ -15,16 +17,35 @@ class Tetrad {
     // this.moveDown = this.moveDown.bind(this);
   }
 
-  getRandomTetrad() {
+  getRandomTetrads() {
+    // let result = [];
     let tetrads = Object.keys(tetradBlocks);
-    let randomtetrad = tetrads[Math.floor(Math.random() * tetrads.length)];
-    return tetradBlocks[randomtetrad];
+    // if (Tetrad.randomTetrads.length === 0) {
+      for (let i = 0; i < 3; i++) {
+        let randomtetrad = tetrads[Math.floor(Math.random() * tetrads.length)];
+        Tetrad.randomTetrads.unshift(tetradBlocks[randomtetrad]);
+      }
+    // }
   }
+  getNextTetrad() {
+    if (Tetrad.randomTetrads.length <= 1) {
+      // debugger
+      this.getRandomTetrads();
+    }
+    return Tetrad.randomTetrads.pop();
+  }
+
+
+  // getRandomTetrad() {
+  //   let tetrads = Object.keys(tetradBlocks);
+  //   let randomtetrad = tetrads[Math.floor(Math.random() * tetrads.length)];
+  //   return tetradBlocks[randomtetrad];
+  // }
 
   drawTetrad() {
     // debugger
-    for (var i = 0; i < this.currentTetrad.length; i++) {
-      for (var j = 0; j < this.currentTetrad.length; j++) {
+    for (let i = 0; i < this.currentTetrad.length; i++) {
+      for (let j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
           Util.drawUnitSquareTetrad(this.xOffset + j, this.yOffset + i, this.color);
         }
@@ -33,8 +54,8 @@ class Tetrad {
   }
   
   removePrev() {
-    for (var i = 0; i < this.currentTetrad.length; i++) {
-      for (var j = 0; j < this.currentTetrad.length; j++) {
+    for (let i = 0; i < this.currentTetrad.length; i++) {
+      for (let j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
           Util.drawUnitSquareBoard(this.xOffset + j, this.yOffset + i, "black");
         }
@@ -98,5 +119,6 @@ class Tetrad {
 // window.Tetrad = Tetrad;
 // window.currtetrad = currtetrad;
 //DELETE
+Tetrad.randomTetrads = [];
 
 module.exports = Tetrad;
