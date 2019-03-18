@@ -132,7 +132,8 @@ class Game {
         }
       }
       if (rowFull) {
-        $('#t-body').trigger("click");
+        document.getElementById('t-body').click();
+        // $('#t-body').trigger("click");
         this.newBoard.grid = this.newBoard.grid.slice(0, i).concat(this.newBoard.grid.slice(i + 1));
         this.addEmptyRow();
         this.score += 10;
@@ -151,8 +152,6 @@ class Game {
         // this.activeTetrad.moveDown();
         this.activeTetrad.yOffset += 1;
         this.activeTetrad.drawTetrad();
-        // document.getElementById('t-body').click();
-        // $('#t-body').trigger("click");
       } else {
         this.stackTetrad();
         this.rowStackFull();
