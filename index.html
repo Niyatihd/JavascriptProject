@@ -3,10 +3,12 @@
 
 <head>
   <title>Getting Started</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script> -->
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <iframe src="silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body id="t-body">
@@ -26,20 +28,23 @@
   </audio>
   <div class="main">
     <div class="left-panel">
-      <audio controls autoplay loop>
+      <audio class="animated slideInLeft" controls autoplay loop>
         <source src="jp.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
       </audio>
-      <button onclick="" id="gameDirections">How to Play</button>
+      <button onclick="" class="animated slideInLeft" id="gameDirections">How to Play</button>
     </div>
     <div class="tetris-canvas">
       <canvas width="300" height="600" style="border: 5px solid grey" id="canvas"></canvas> 
     </div>
-    <div class="right-panel">
+    <div class="right-panel animated slideInRight">
       <div id="score">Score:</div>
-      <div id="next-tetrad">
+      <div id="next-tetrad" class="animated slideInRight">
         <span>Next Tetrad</span>
         <canvas width="120" height="120" style="border: 5px solid grey" id="canvas-next-tetrad"></canvas>
+      </div>
+      <button type="button" onClick="window.location.reload();">Restart</button>
+      <div class="game-name">
+        <span>TETRI-SAURUS</span>
       </div>
     </div>
   </div>

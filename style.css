@@ -22,17 +22,44 @@ img {
   z-index: -1;
 }
 
-#gameDirections {
-  width: 100px;
-  height: 25px;
+#gameDirections, .right-panel > button {
   margin-top: 20px;
+  font-weight: bolder;
+  font-size: 18px;
+  border-radius: 5px;
+  font-family: fantasy;
+  width: 140px;
+  opacity: 0.8;
+  height: 30px;
+  border: 1px solid coral;
+  box-shadow: 3px 3px coral;
+  cursor: pointer;
 }
 
 #gameDirections-text {
   background: white;
-  width: 300px;
-  height: 200px;
+  width: 280px;
+  height: 326px;
   margin-top: 20px;
+  font-size: 15px;
+  padding: 10px;
+  font-family: fantasy;
+  background: royalblue;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 900;
+  border: 1px solid powderblue;
+  border-radius: 5px;
+  opacity: 0.9;
+}
+
+#gameDirections-text > ul {
+  padding: 0;
+  padding-left: 20px;
+}
+
+#gameDirections-text > ul > li {
+  padding-bottom: 10px;
 }
 
 body {
@@ -62,9 +89,9 @@ ellipse {
 
 #score {
   width: 200px;
-  height: 100px;
+  height: 71px;
   background: white;
-  opacity: 0.5;
+  opacity: 0.8;
   color: black;
   margin-bottom: 20px;
   border: 1px solid coral;
@@ -72,6 +99,11 @@ ellipse {
   padding: 5px;
   font-family: fantasy;
   font-weight: bolder;
+  font-size: 25px;
+  box-shadow: 3px 3px coral;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 35px;
 }
 
 #next-tetrad {
@@ -82,18 +114,27 @@ ellipse {
   width: 300px;
   height: 200px;
   color: black;
-  margin-top: 20px;
+  margin-top: 30px;
+}
+#next-tetrad > span {
+  font-family: fantasy;
+  font-size: 25px;
 }
 
 #startGame {
-width: 250px;
-height: 136px;
-background: powderblue;
-color: black;
-left: 300px;
-padding: 0;
-margin-top: -400px;
-/* margin-top: -400px; */
+  width: 250px;
+  height: 136px;
+  background: powderblue;
+  color: black;
+  left: 300px;
+  padding: 0;
+  font-size: 25px;
+  margin-top: -400px;
+  /* margin-top: -400px; */
+  font-family: fantasy;
+  border: 10px solid white;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .left-panel {
@@ -102,11 +143,29 @@ margin-top: -400px;
   align-items: center;
 }
 
-.left-panel {
+.left-panel > audio {
+  opacity: 0.5;
+}
+
+.right-panel {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .hide {
   display: none;
+}
+
+.game-name {
+  margin-top: 186px;
+}
+.game-name > span {
+  padding-top: 50px;
+  font-family: fantasy;
+  font-size: 55px;
+  margin-top: 50px;
+  font-weight: bolder;
+  /* background: royalblue; */
+  text-shadow: 3px 3px mistyrose;
 }

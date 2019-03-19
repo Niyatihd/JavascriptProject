@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. Add event handler
   button.addEventListener("click", function () {
       // alert("did something");
-    document.getElementById('startGame').classList.add('hide');
+    document.getElementById('startGame').classList.add('animated', 'zoomOutDown');
+    // document.getElementById('startGame').classList.add('hide');
 
     // let showNext = document.createElement("div");
     // showNext.innerHTML = "Next Tetrad";
@@ -48,9 +49,26 @@ document.addEventListener("DOMContentLoaded", () => {
     function animate() {
       let now = Date.now();
       let timeDelta = now - start;
-      if (timeDelta > 750) {
-        newGame.moveDown();
-        start = Date.now();
+      if (newGame.score <= 50) {
+        if (timeDelta > 750) {
+          newGame.moveDown();
+          start = Date.now();
+        }
+      } else if (newGame.score <= 100) {
+        if (timeDelta > 400) {
+          newGame.moveDown();
+          start = Date.now();
+        }
+      } else if (newGame.score <= 200) {
+        if (timeDelta > 200) {
+          newGame.moveDown();
+          start = Date.now();
+        }
+      } else {
+        if (timeDelta > 120) {
+          newGame.moveDown();
+          start = Date.now();
+        }
       }
       // debugger
       if (!newGame.gameOver) {

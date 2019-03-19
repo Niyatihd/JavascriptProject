@@ -1,14 +1,10 @@
 let steps = [
-              "OBJECTIVE - Use your physical and mental skills at clearing as many lines as possible.",
-              "CLEAR LINES - Move the tetraminoes and drop them on each other like completing a puzzle to fill all the blocks in one line.",
-              "NEXT TETRAD - It will show you the upcoming tetrad so you can plan your current and next move at the same time.",
-              "SCORE POINTS - Score points by clearing as many lines as possible before game is over.",
-              "GAME OVER - If the stack of tetrominoes touches the ceiling you 're toast!",
-              "DIRECTION - Use the arrow keys to move and rotate the tetrominoes.",
-              "UP Key - Rotates the tetrominoes.",
-              "RIGTH Key - Moves the tetrominoes right.",
-              "LEFT Key - Moves the tetrominoes left.",
-              "DOWN Key - Moves the tetrominoes down.",
+              "OBJECTIVE: Try and score as many points as you can by clearing maximum number of lines. And if you make a skyscraper you are toast.",
+              "DIRECTION: Use the arrow keys to move and rotate the tetrads.",
+              "UP: Rotates the tetrads.",
+              "RIGTH: Moves the tetrads right.",
+              "LEFT: Moves the tetrads left.",
+              "DOWN: Moves the tetrads down.",
             ];
 
 // for (let i = 0; i < steps.length; i++) {
@@ -26,10 +22,11 @@ function display() {
   let clicked = false;
   let count = 0;
   let instructions = document.createElement("div");
-  instructions.innerHTML = "Game Directions";
+  // instructions.innerHTML = "Game Directions";
   instructions.id = "gameDirections-text";
   let ul = document.createElement('ul');
   instructions.appendChild(ul);
+  instructions.classList.add('animated', 'rollIn');
   
   for (let i = 0; i < steps.length; i++) {
     let step = steps[i];
