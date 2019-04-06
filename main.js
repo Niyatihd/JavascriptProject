@@ -17777,6 +17777,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
         tetrisCanvas.classList.add("hide");
         newGame.gameOverDisplay();
+        document.getElementById("pause-game").disabled = true;
       }
 
       // if (!newGame.gameOver) {
