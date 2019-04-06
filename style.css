@@ -147,6 +147,7 @@ ellipse {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 300px;
 }
 
 .left-panel > audio {
@@ -193,4 +194,38 @@ ellipse {
 
 button:focus {
   outline: 0;
+}
+
+.bg-music > button:hover,
+audio:focus,
+audio:active {
+  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.bg-music > button {
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  -moz-box-shadow: 2px 2px 4px 0px #006773;
+  -webkit-box-shadow: 2px 2px 4px 0px #006773;
+  box-shadow: 2px 2px 4px 0px #006773;
+  -moz-border-radius: 7px 7px 7px 7px;
+  -webkit-border-radius: 7px 7px 7px 7px;
+  border-radius: 7px 7px 7px 7px;
+  padding: 4px 10px;
+  border: 1px solid coral;
+  /* box-shadow: 3px 3px coral; */
+  font-weight: bolder;
+  /* opacity: 0.8; */
+  font-family: fantasy;
+  background: rgba(255, 255, 255, 0.8);
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 12px;
 }
