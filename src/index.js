@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
     newGame.togglePause();
     if (newGame.pause === false) {
       document.getElementsByClassName("tetris-canvas-board")[0].classList.remove("hide");
+    } else {
+      // document.getElementsByClassName("game-over")[0].innerHTML = "Paused";
+      // pauseButton.innerHTML = "Resume";
+      newGame.gamePausedDisplay();
     }
     console.log(newGame.pause);
   });
@@ -130,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!newGame.gameOver) {
             if (newGame.pause) {
-              // cancelAnimationFrame(requestAnimationFrame(animate));
               document.getElementsByClassName("tetris-canvas-board")[0].classList.add("hide");
               pauseButton.innerHTML = "Resume";
             } else {
@@ -141,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // debugger
       } else {
         cancelAnimationFrame(requestAnimationFrame(animate));
-        // alert("Game Over!");
         let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
         tetrisCanvas.classList.add("hide");
         newGame.gameOverDisplay();

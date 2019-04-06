@@ -230,6 +230,15 @@ class Game {
     tetrisCanvasDiv.appendChild(div);
   }
 
+  gamePausedDisplay() {
+    let div = document.createElement("div");
+    div.innerHTML = "Game Paused";
+    div.classList.add("game-over", "animated", "bounceInUp");
+    
+    let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
+    tetrisCanvasDiv.appendChild(div);
+  }
+
 }
 
 
