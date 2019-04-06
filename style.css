@@ -23,8 +23,8 @@ img {
   z-index: -1;
 }
 
-#gameDirections, .right-panel > button {
-  margin-top: 20px;
+#gameDirections, .right-panel > button, #pause-game {
+  margin-top: 12px;
   font-weight: bolder;
   font-size: 18px;
   border-radius: 5px;
@@ -120,7 +120,9 @@ ellipse {
 }
 #next-tetrad > span {
   font-family: fantasy;
-  font-size: 25px;
+  font-size: 26px;
+  text-shadow: 2px 2px mistyrose;
+  font-weight: bolder;
 }
 
 #startGame {
@@ -130,13 +132,15 @@ ellipse {
   color: black;
   left: 300px;
   padding: 0;
-  font-size: 25px;
+  font-size: 26px;
   margin-top: -400px;
   /* margin-top: -400px; */
   font-family: fantasy;
   border: 10px solid white;
   opacity: 0.8;
   cursor: pointer;
+  text-shadow: 2px 2px mistyrose;
+  font-weight: bolder;
 }
 
 .left-panel {
@@ -160,8 +164,9 @@ ellipse {
 }
 
 .game-name {
-  margin-top: 186px;
+  margin-top: 105px;
 }
+
 .game-name > span {
   padding-top: 50px;
   font-family: fantasy;

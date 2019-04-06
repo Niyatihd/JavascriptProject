@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let pauseButton = document.createElement("button");
   pauseButton.setAttribute("id", "pause-game");
+  pauseButton.innerHTML += "Pause";
   document.getElementsByClassName("trial-pause")[0].appendChild(pauseButton);
   pauseButton.addEventListener("click", function () {
     newGame.togglePause();
