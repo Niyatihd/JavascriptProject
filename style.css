@@ -173,14 +173,14 @@ ellipse {
 
 .game-over {
   position: absolute;
-  top: 10em;
-  border: 4px solid coral;
-  border-radius: 27px;
+  top: 9em;
+  border: 10px solid white;
+  /* border-radius: 15px; */
   padding: 2em 4em;
   margin: 0 40px 0 40px;
   font-size: 27px;
   font-family: fantasy;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   /* opacity: 0.7; */
 }
 

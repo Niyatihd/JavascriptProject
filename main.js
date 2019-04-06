@@ -17546,7 +17546,8 @@ class Game {
   gameOverDisplay() {
     let div = document.createElement("div");
     div.innerHTML = "Game Over";
-    div.classList.add("game-over");
+    div.classList.add("game-over", "animated", "bounceInUp");
+    
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);
   }
