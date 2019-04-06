@@ -155,22 +155,29 @@ class Game {
     }
   }
 
-    moveDown() {
-      this.removeNextTetrad();
-      this.updateNextTetrad();
-      if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
-        // debugger
-        this.activeTetrad.removePrev();
-        // this.activeTetrad.moveDown();
-        this.activeTetrad.yOffset += 1;
-        this.activeTetrad.drawTetrad();
-      } else {
-        this.stackTetrad();
-        this.rowStackFull();
-        this.newBoard.drawBoard();
-        this.activeTetrad = new Tetrad();
-      }
+  moveDown() {
+    this.removeNextTetrad();
+    this.updateNextTetrad();
+    if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
+      // debugger
+      this.activeTetrad.removePrev();
+      // this.activeTetrad.moveDown();
+      this.activeTetrad.yOffset += 1;
+      this.activeTetrad.drawTetrad();
+    } else {
+      this.stackTetrad();
+      this.rowStackFull();
+      this.newBoard.drawBoard();
+      this.activeTetrad = new Tetrad();
     }
+  }
+
+  moveUp() {
+    // this.activeTetrad.removePrev();
+    // this.activeTetrad.moveDown();
+    this.activeTetrad.yOffset -= 1;
+    // this.activeTetrad.drawTetrad();
+  }
   
 
 

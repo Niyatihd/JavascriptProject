@@ -93,6 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
             start = Date.now();
           }
         }
+      } else {
+        for (let i = 0; i < 1; i++) {
+          newGame.moveUp();
+          newGame.moveDown();
+          start = Date.now();
+        }
       }
       // debugger
               // if (newGame.pause === true) {
