@@ -17566,7 +17566,7 @@ class Game {
 
   gameOverDisplay() {
     let div = document.createElement("div");
-    div.innerHTML = "Game Over";
+    div.innerHTML = "GAME OVER";
     div.classList.add("game-over", "animated", "bounceInUp");
     
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
@@ -17575,8 +17575,8 @@ class Game {
 
   gamePausedDisplay() {
     let div = document.createElement("div");
-    div.innerHTML = "Game Paused";
-    div.classList.add("game-over", "animated", "bounceInUp");
+    div.innerHTML = "GAME PAUSED";
+    div.classList.add("game-over", "animated", "zoomIn");
     
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);
