@@ -12,6 +12,7 @@ class Game {
     // this.animate = this.animate.bind(this);
     this.gameOver = false;
     this.score = 0;
+    this.moveDownKeyActive = true;
   }
 
   updateScore() {
@@ -173,11 +174,11 @@ class Game {
           this.activeTetrad.drawTetrad();
         }
         // dropStart = Date.now();
-        break;
+      break;
       case 38:
         this.rotateTetrad1();
         // dropStart = Date.now();
-        break;
+      break;
       case 39:
         if (!this.collision(1, 0, this.activeTetrad.currentTetrad)) {
           this.activeTetrad.removePrev();
@@ -185,15 +186,27 @@ class Game {
           this.activeTetrad.drawTetrad();
         }
         // dropStart = Date.now();
-        break;
+      break;
       case 40:
-        this.moveDown();
-        if (this.gameOver) {
-          alert("Game Over");
+        if (this.moveDownKeyActive) {
+          this.moveDown();
         }
-        break;
-      }
+        if (this.gameOver) {
+          // let tetrisCanvas = document.getElementsByClassName("tetris-canvas")[0];
+          // tetrisCanvas.classList.add("hide");
+          this.moveDownKeyActive = false;
+        }
+      break;
     }
+  }
+
+  gameOverDisplay() {
+    let div = document.createElement("div");
+    div.innerHTML = "Game Over";
+    div.classList.add("game-over");
+    let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
+    tetrisCanvasDiv.appendChild(div);
+  }
 
 }
 

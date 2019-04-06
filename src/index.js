@@ -75,7 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(animate);
       } else {
         cancelAnimationFrame(requestAnimationFrame(animate));
-        alert("Game Over!");
+        // alert("Game Over!");
+        let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
+        tetrisCanvas.classList.add("hide");
+        newGame.gameOverDisplay();
       }
 
     }
