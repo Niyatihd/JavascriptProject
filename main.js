@@ -17576,7 +17576,7 @@ class Game {
   gamePausedDisplay() {
     let div = document.createElement("div");
     div.innerHTML = "GAME PAUSED";
-    div.classList.add("game-over", "animated", "zoomIn");
+    div.classList.add("game-paused", "animated", "zoomIn");
     
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);
@@ -17706,6 +17706,9 @@ document.addEventListener("DOMContentLoaded", () => {
   pauseButton.addEventListener("click", function () {
     newGame.togglePause();
     if (newGame.pause === false) {
+      // if (document.getElementsByClassName("game-paused")[0]) {
+      //   document.getElementsByClassName("game-paused")[0].classList.add("hide");
+      // }
       document.getElementsByClassName("tetris-canvas-board")[0].classList.remove("hide");
     } else {
       // document.getElementsByClassName("game-over")[0].innerHTML = "Paused";
@@ -17817,6 +17820,9 @@ document.addEventListener("DOMContentLoaded", () => {
               document.getElementsByClassName("tetris-canvas-board")[0].classList.add("hide");
               pauseButton.innerHTML = "Resume";
             } else {
+              if (document.getElementsByClassName("game-paused")[0]) {
+                document.getElementsByClassName("game-paused")[0].outerHTML = "";
+              }
               pauseButton.innerHTML = "Pause";
             }
             requestAnimationFrame(animate);

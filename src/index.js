@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   pauseButton.addEventListener("click", function () {
     newGame.togglePause();
     if (newGame.pause === false) {
+      // if (document.getElementsByClassName("game-paused")[0]) {
+      //   document.getElementsByClassName("game-paused")[0].classList.add("hide");
+      // }
       document.getElementsByClassName("tetris-canvas-board")[0].classList.remove("hide");
     } else {
       // document.getElementsByClassName("game-over")[0].innerHTML = "Paused";
@@ -137,6 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
               document.getElementsByClassName("tetris-canvas-board")[0].classList.add("hide");
               pauseButton.innerHTML = "Resume";
             } else {
+              if (document.getElementsByClassName("game-paused")[0]) {
+                document.getElementsByClassName("game-paused")[0].outerHTML = "";
+              }
               pauseButton.innerHTML = "Pause";
             }
             requestAnimationFrame(animate);

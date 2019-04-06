@@ -233,7 +233,7 @@ class Game {
   gamePausedDisplay() {
     let div = document.createElement("div");
     div.innerHTML = "GAME PAUSED";
-    div.classList.add("game-over", "animated", "zoomIn");
+    div.classList.add("game-paused", "animated", "zoomIn");
     
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);

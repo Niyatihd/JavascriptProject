@@ -177,7 +177,7 @@ ellipse {
   text-shadow: 3px 3px mistyrose;
 }
 
-.game-over {
+.game-over, .game-paused {
   position: absolute;
   top: 8em;
   border: 10px solid white;
