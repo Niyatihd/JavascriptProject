@@ -17488,7 +17488,7 @@ class Game {
       }
       if (rowFull) {
         // document.getElementById('t-body').click();
-        $('#t-body').trigger("click");
+        $('#canvas').trigger("click");
         this.newBoard.grid = this.newBoard.grid.slice(0, i).concat(this.newBoard.grid.slice(i + 1));
         this.addEmptyRow();
         this.score += 10;
