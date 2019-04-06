@@ -17803,6 +17803,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (newGame.pause) {
               // cancelAnimationFrame(requestAnimationFrame(animate));
               document.getElementsByClassName("tetris-canvas-board")[0].classList.add("hide");
+              pauseButton.innerHTML = "Resume";
+            } else {
+              pauseButton.innerHTML = "Pause";
             }
             requestAnimationFrame(animate);
 
