@@ -81,6 +81,7 @@ height: 100%;
 width: 100%;
 top: 500px;
 /* background: blue; */
+z-index: -1;
 }
 
 ellipse {
@@ -173,14 +174,15 @@ ellipse {
 
 .game-over {
   position: absolute;
-  top: 9em;
+  top: 6em;
   border: 10px solid white;
   /* border-radius: 15px; */
   padding: 2em 4em;
   margin: 0 40px 0 40px;
-  font-size: 27px;
+  font-size: 30px;
   font-family: fantasy;
   background: rgba(255, 255, 255, 0.2);
-  /* opacity: 0.7; */
+  font-weight: bolder;
+  text-shadow: 3px 3px mistyrose;
 }
 

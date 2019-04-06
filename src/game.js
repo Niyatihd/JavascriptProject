@@ -3,16 +3,27 @@ const Board = require('./board');
 const Tetrad = require('./tetrad');
 const tetradBlocks = require('./tetrad_blocks');
 const Util = require('./util');
+const animate = require('./util');
 
 class Game {
   constructor() {
     this.activeTetrad = new Tetrad();
     this.newBoard = new Board();
     this.tetradMoves = this.tetradMoves.bind(this);
+    this.togglePause = this.togglePause.bind(this);
     // this.animate = this.animate.bind(this);
     this.gameOver = false;
     this.score = 0;
     this.moveDownKeyActive = true;
+    this.pause = false;
+  }
+
+  togglePause() {
+    if (this.pause === true) {
+      this.pause = false;
+    } else if (this.pause === false) {
+      this.pause = true;
+    }
   }
 
   updateScore() {
@@ -196,6 +207,9 @@ class Game {
           // tetrisCanvas.classList.add("hide");
           this.moveDownKeyActive = false;
         }
+      break;
+      case 80:
+        this.togglePause();
       break;
     }
   }
