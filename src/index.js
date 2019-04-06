@@ -8,8 +8,6 @@ const display = require('./how_to_play');
 
 document.addEventListener("DOMContentLoaded", () => {
   display();
-  // const canvasEl = document.getElementsByTagName("canvas")[0];
-  // const ctx = canvasEl.getContext("2d");
   let button = document.createElement("button");
   button.innerHTML = "Start Game";
   button.id = "startGame";
@@ -26,16 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
   pauseButton.addEventListener("click", function () {
     newGame.togglePause();
     if (newGame.pause === false) {
-      // if (document.getElementsByClassName("game-paused")[0]) {
-      //   document.getElementsByClassName("game-paused")[0].classList.add("hide");
-      // }
       document.getElementsByClassName("tetris-canvas-board")[0].classList.remove("hide");
     } else {
-      // document.getElementsByClassName("game-over")[0].innerHTML = "Paused";
-      // pauseButton.innerHTML = "Resume";
       newGame.gamePausedDisplay();
     }
-    console.log(newGame.pause);
+    // console.log(newGame.pause);
   });
 
   
@@ -44,36 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
   button.addEventListener("click", function () {
       // alert("did something");
     document.getElementById('startGame').classList.add('animated', 'zoomOutDown');
-    // document.getElementById('startGame').classList.add('hide');
-
-    // let showNext = document.createElement("div");
-    // showNext.innerHTML = "Next Tetrad";
-    // showNext.id = "next-tetrad";
-    // let nextTetradDiv = document.getElementsByClassName("right-panel")[0];
-    // body.appendChild(nextTetradDiv);
-
-    // element.addEventListener("click", function () {
-    //   alert("Hello World!");
     
     const newGame = new Game();
     //DELETE
       window.newGame = newGame;
     //DELETE
-    // let button = document.getElementById("gameStart");
-    // button.onclick();
     newGame.render();
     document.addEventListener("keydown", newGame.tetradMoves);
 
     let start = Date.now();
-    // let gameOver = false;
-
-    // let pauseButton = document.getElementById("pause-game");
-    // pauseButton.addEventListener("click", function () {
-    //   newGame.togglePause();
-    // });
-    // let pauseButton = document.getElementById("pause-game");
-    
-    
 
     function animate() {
       let now = Date.now();
@@ -107,46 +79,18 @@ document.addEventListener("DOMContentLoaded", () => {
           start = Date.now();
         }
       }
-      // debugger
-              // if (newGame.pause === true) {
-              //   // debugger
-              //   cancelAnimationFrame(requestAnimationFrame(animate));
-              // } else if (newGame.pause === false) {
-              //   requestAnimationFrame(animate);
-              // }
-
-      
-
-      // if (!newGame.gameOver && newGame.pause === false) {
-      //   requestAnimationFrame(animate);
-      // } else if (!newGame.gameOver && newGame.pause === true) {
-      //   // debugger
-      //   cancelAnimationFrame(requestAnimationFrame(animate));
-      // } else if (newGame.gameOver) {
-      //   cancelAnimationFrame(requestAnimationFrame(animate));
-      //   // alert("Game Over!");
-      //   let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
-      //   tetrisCanvas.classList.add("hide");
-      //   newGame.gameOverDisplay();
-      // }
-
-
-
-      
-      
 
       if (!newGame.gameOver) {
-            if (newGame.pause) {
-              document.getElementsByClassName("tetris-canvas-board")[0].classList.add("hide");
-              pauseButton.innerHTML = "Resume";
-            } else {
-              if (document.getElementsByClassName("game-paused")[0]) {
-                document.getElementsByClassName("game-paused")[0].outerHTML = "";
-              }
-              pauseButton.innerHTML = "Pause";
-            }
-            requestAnimationFrame(animate);
-
+        if (newGame.pause) {
+          document.getElementsByClassName("tetris-canvas-board")[0].classList.add("hide");
+          pauseButton.innerHTML = "Resume";
+        } else {
+          if (document.getElementsByClassName("game-paused")[0]) {
+            document.getElementsByClassName("game-paused")[0].outerHTML = "";
+          }
+          pauseButton.innerHTML = "Pause";
+        }
+        requestAnimationFrame(animate);
         // debugger
       } else {
         cancelAnimationFrame(requestAnimationFrame(animate));
@@ -154,8 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
         tetrisCanvas.classList.add("hide");
         newGame.gameOverDisplay();
       }
-
-
 
       // if (!newGame.gameOver) {
       //   // debugger
@@ -167,17 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
       //   tetrisCanvas.classList.add("hide");
       //   newGame.gameOverDisplay();
       // }
-
-
-
     }
 
-  
     window.requestAnimationFrame(animate);
-  });
-  //  });
-  
-
- });
+  });  
+});
 
 
