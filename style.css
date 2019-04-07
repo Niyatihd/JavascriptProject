@@ -41,17 +41,17 @@ img {
   background: white;
   width: 280px;
   height: 326px;
-  margin-top: 20px;
+  margin-top: 32px;
   font-size: 15px;
   padding: 8px;
   font-family: fantasy;
-  background: royalblue;
-  color: white;
   letter-spacing: 1px;
   font-weight: 900;
-  border: 1px solid powderblue;
   border-radius: 5px;
   opacity: 0.9;
+  background: skyblue;
+  color: black;
+  border: 1px solid skyblue;
 }
 
 #gameDirections-text > ul {
@@ -171,7 +171,7 @@ ellipse {
 .game-name > span {
   padding-top: 50px;
   font-family: fantasy;
-  font-size: 55px;
+  font-size: 42px;
   margin-top: 50px;
   font-weight: bolder;
   /* background: royalblue; */
@@ -233,8 +233,9 @@ audio:active {
 footer {
   color: white;
   position: absolute;
-  top: 436px;
-  left: 64px;
+  top: 433px;
+  left: 84px;
+  
 }
 
 .footer-icons {
@@ -251,13 +252,19 @@ footer {
 }
 
 .copyright > li {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .copyright > li > a {
   text-decoration: none;
   color: white;
   font-family: fantasy;
+  padding: 5px;
+}
+
+.copyright > li > a:hover {
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px black;
 }
 
 .footer-icons > li {
@@ -269,5 +276,12 @@ footer {
   height: 50px;
   position: absolute;
   z-index: 9999;
+  /* filter: sepia(100%); */
+  filter: brightness(0) invert(1);
 }
+
+#icons:hover {
+  filter: drop-shadow(2px 5px 0px black);
+}
+
 
