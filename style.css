@@ -261,6 +261,12 @@ footer {
   font-family: fantasy;
   padding: 5px;
 }
+.copyright > li > a {
+  text-decoration: none;
+  color: white;
+  font-family: fantasy;
+  padding: 5px;
+}
 
 .copyright > li > a:hover {
   border-radius: 10px;

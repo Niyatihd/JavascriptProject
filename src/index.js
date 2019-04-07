@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let timeDelta = now - start;
       if (!newGame.pause) {
         if (newGame.score <= 50) {
-          if (timeDelta > 750) {
+          if (timeDelta > 600) {
             newGame.moveDown();
             start = Date.now();
           }

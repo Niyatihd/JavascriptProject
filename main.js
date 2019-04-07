@@ -17558,9 +17558,29 @@ class Game {
           this.moveDownKeyActive = false;
         }
       break;
-      case 80:
-        this.togglePause();
+      case 32:
+        this.hardDrop();
       break;
+    }
+  }
+
+  hardDrop() {
+    let dropAt;
+    let i = 1;
+    while (!this.collision(0, i, this.activeTetrad.currentTetrad)) {
+        dropAt = i;
+        i++;
+    }
+    // console.log(dropAt);//14
+
+    this.activeTetrad.yOffset += dropAt;
+    // console.log(this.activeTetrad.yOffset);//17
+    // this.activeTetrad.removePrev();
+    // this.activeTetrad.moveDown();
+    if (this.activeTetrad.yOffset >= 0) {
+      this.activeTetrad.drawTetrad();
+    } else {
+      return;
     }
   }
 
@@ -17732,7 +17752,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let timeDelta = now - start;
       if (!newGame.pause) {
         if (newGame.score <= 50) {
-          if (timeDelta > 750) {
+          if (timeDelta > 600) {
             newGame.moveDown();
             start = Date.now();
           }
