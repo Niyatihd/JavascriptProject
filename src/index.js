@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     newGame.render();
     document.addEventListener("keydown", newGame.tetradMoves);
 
+  
     let start = Date.now();
 
     function animate() {

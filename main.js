@@ -17565,22 +17565,8 @@ class Game {
   }
 
   hardDrop() {
-    let dropAt;
-    let i = 1;
-    while (!this.collision(0, i, this.activeTetrad.currentTetrad)) {
-        dropAt = i;
-        i++;
-    }
-    // console.log(dropAt);//14
-
-    this.activeTetrad.yOffset += dropAt;
-    // console.log(this.activeTetrad.yOffset);//17
-    // this.activeTetrad.removePrev();
-    // this.activeTetrad.moveDown();
-    if (this.activeTetrad.yOffset >= 0) {
-      this.activeTetrad.drawTetrad();
-    } else {
-      return;
+    while (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
+      this.moveDown();
     }
   }
 
@@ -17632,6 +17618,7 @@ let steps = [
               "RIGTH: Moves the tetrads right.",
               "LEFT: Moves the tetrads left.",
               "DOWN: Moves the tetrads down.",
+              "SPACE: Hard Drop"
             ];
 
 // for (let i = 0; i < steps.length; i++) {
@@ -17745,6 +17732,7 @@ document.addEventListener("DOMContentLoaded", () => {
     newGame.render();
     document.addEventListener("keydown", newGame.tetradMoves);
 
+  
     let start = Date.now();
 
     function animate() {

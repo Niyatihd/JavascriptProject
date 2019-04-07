@@ -40,10 +40,10 @@ img {
 #gameDirections-text {
   background: white;
   width: 280px;
-  height: 326px;
-  margin-top: 32px;
+  height: 357px;
+  margin-top: 25px;
   font-size: 15px;
-  padding: 8px;
+  padding: 0 8px;
   font-family: fantasy;
   letter-spacing: 1px;
   font-weight: 900;

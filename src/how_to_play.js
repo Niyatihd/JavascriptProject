@@ -5,6 +5,7 @@ let steps = [
               "RIGTH: Moves the tetrads right.",
               "LEFT: Moves the tetrads left.",
               "DOWN: Moves the tetrads down.",
+              "SPACE: Hard Drop"
             ];
 
 // for (let i = 0; i < steps.length; i++) {

@@ -222,22 +222,8 @@ class Game {
   }
 
   hardDrop() {
-    let dropAt;
-    let i = 1;
-    while (!this.collision(0, i, this.activeTetrad.currentTetrad)) {
-        dropAt = i;
-        i++;
-    }
-    // console.log(dropAt);//14
-
-    this.activeTetrad.yOffset += dropAt;
-    // console.log(this.activeTetrad.yOffset);//17
-    // this.activeTetrad.removePrev();
-    // this.activeTetrad.moveDown();
-    if (this.activeTetrad.yOffset >= 0) {
-      this.activeTetrad.drawTetrad();
-    } else {
-      return;
+    while (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
+      this.moveDown();
     }
   }
 
