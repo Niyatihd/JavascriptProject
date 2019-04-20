@@ -11,7 +11,6 @@ class Game {
     this.newBoard = new Board();
     this.tetradMoves = this.tetradMoves.bind(this);
     this.togglePause = this.togglePause.bind(this);
-    // this.animate = this.animate.bind(this);
     this.gameOver = false;
     this.score = 0;
     this.moveDownKeyActive = true;
@@ -32,28 +31,20 @@ class Game {
   }
 
   updateNextTetrad() {
-    // let nextTetradDiv = document.getElementById("next-tetrad");
     let nextTetrad = Tetrad.randomTetrads[Tetrad.randomTetrads.length - 1][0];
-    // nextTetradDiv.innerHTML = nextTetrad;
     Util.drawNextTetrad(nextTetrad);
   }
 
   removeNextTetrad() {
-    // let nextTetradDiv = document.getElementById("next-tetrad");
-    // let nextTetrad = Tetrad.randomTetrads[Tetrad.randomTetrads.length - 1][0];
-    // nextTetradDiv.innerHTML = nextTetrad;
     Util.undrawNextTetrad();
   }
 
   render() {
     this.newBoard.drawBoard();
     this.activeTetrad.drawTetrad();
-    // debugger
     this.updateScore();
     this.removeNextTetrad();
     this.updateNextTetrad();
-    // debugger
-    // this.animate();
   }
 
   collision(nextX, nextY, currentTetrad) {
@@ -98,7 +89,6 @@ class Game {
     }
 
     if (!this.collision(shift, 0, nextTetradRotation)) {
-      // debugger
       this.activeTetrad.removePrev();
       this.activeTetrad.xOffset += shift;
       this.activeTetrad.currentRotation = (this.activeTetrad.currentRotation + 1) % this.activeTetrad.tetrad.length;
@@ -108,8 +98,6 @@ class Game {
   }
 
   stackTetrad() {
-    // this.removeNextTetrad();
-    // this.updateNextTetrad();
     for (let i = 0; i < this.activeTetrad.currentTetrad.length; i++) {
       for (let j = 0; j < this.activeTetrad.currentTetrad.length; j++) {
         if (!this.activeTetrad.currentTetrad[i][j]) {
@@ -120,12 +108,9 @@ class Game {
           break;
         }
         if (this.activeTetrad.currentTetrad[i][j]) {
-          // debugger
           let idxJ = this.activeTetrad.xOffset + j;
           let idxI = this.activeTetrad.yOffset + i;
           this.newBoard.grid[idxI][idxJ] = "yellow";
-          // this.removeNextTetrad();
-          // this.updateNextTetrad();
         }
       }
     }
@@ -144,12 +129,10 @@ class Game {
         }
       }
       if (rowFull) {
-        // document.getElementById('t-body').click();
         $('#canvas').trigger("click");
         this.newBoard.grid = this.newBoard.grid.slice(0, i).concat(this.newBoard.grid.slice(i + 1));
         this.addEmptyRow();
         this.score += 10;
-        // let scoreBoard = document.getElementById("score");
         this.updateScore(this.score);
       }
     }
@@ -159,9 +142,7 @@ class Game {
     this.removeNextTetrad();
     this.updateNextTetrad();
     if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
-      // debugger
       this.activeTetrad.removePrev();
-      // this.activeTetrad.moveDown();
       this.activeTetrad.yOffset += 1;
       this.activeTetrad.drawTetrad();
     } else {
@@ -173,14 +154,8 @@ class Game {
   }
 
   moveUp() {
-    // this.activeTetrad.removePrev();
-    // this.activeTetrad.moveDown();
     this.activeTetrad.yOffset -= 1;
-    // this.activeTetrad.drawTetrad();
   }
-  
-
-
 
   tetradMoves(e) {
     e.preventDefault();
@@ -191,33 +166,28 @@ class Game {
           this.activeTetrad.moveLeft();
           this.activeTetrad.drawTetrad();
         }
-        // dropStart = Date.now();
-      break;
+        break;
       case 38:
         this.rotateTetrad1();
-        // dropStart = Date.now();
-      break;
+        break;
       case 39:
         if (!this.collision(1, 0, this.activeTetrad.currentTetrad)) {
           this.activeTetrad.removePrev();
           this.activeTetrad.moveRight();
           this.activeTetrad.drawTetrad();
         }
-        // dropStart = Date.now();
-      break;
+        break;
       case 40:
         if (this.moveDownKeyActive) {
           this.moveDown();
         }
         if (this.gameOver) {
-          // let tetrisCanvas = document.getElementsByClassName("tetris-canvas")[0];
-          // tetrisCanvas.classList.add("hide");
           this.moveDownKeyActive = false;
         }
-      break;
+        break;
       case 32:
         this.hardDrop();
-      break;
+        break;
     }
   }
 
@@ -231,7 +201,7 @@ class Game {
     let div = document.createElement("div");
     div.innerHTML = "GAME OVER";
     div.classList.add("game-over", "animated", "bounceInUp");
-    
+
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);
   }
@@ -240,18 +210,13 @@ class Game {
     let div = document.createElement("div");
     div.innerHTML = "GAME PAUSED";
     div.classList.add("game-paused", "animated", "zoomIn");
-    
+
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);
   }
 
 }
 
-
-// const gameex = new Game();
-// window.gameex = gameex;
-// const x = new Game
-// window.x = x;
 module.exports = Game;
 
 //DELETE

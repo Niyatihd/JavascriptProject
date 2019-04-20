@@ -17280,7 +17280,7 @@ class Board {
     this.baseColor = "black";
     this.grid = Array(20).fill(null).map(() => Array(10).fill(this.baseColor));
   }
-  
+
   drawBoard() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
@@ -17297,40 +17297,9 @@ class Board {
     }
   }
 
-  // addEmptyRow() {
-  //  this.grid.unshift(Array(10).fill(this.baseColor));
-  // }
-
-  // rowStackFull() {
-  //   for (let i = 0; i < this.rows; i++) {
-  //     let rowFull = true;
-  //     for (let j = 0; j < this.columns; j++) {
-  //       if (this.grid[i][j] === this.baseColor) {
-  //         rowFull = false;
-  //       }
-  //     }
-  //     if (rowFull) {
-  //       // this.fillBoard(i);
-  //       $('#t-body').trigger("click");
-  //       this.grid =  this.grid.slice(0, i).concat(this.grid.slice(i+1));
-  //       this.addEmptyRow();
-  //       this.score += 10;
-  //     }
-  //   }
-  // }
-
-//   drawBoardStack(i, j) {
-//     Util.drawUnitSquareTetrad(j, i, this.grid[i][j]);
-//   }
 }
 
 module.exports = Board;
-
-
-
-
-
-
 
 /***/ }),
 
@@ -17354,7 +17323,6 @@ class Game {
     this.newBoard = new Board();
     this.tetradMoves = this.tetradMoves.bind(this);
     this.togglePause = this.togglePause.bind(this);
-    // this.animate = this.animate.bind(this);
     this.gameOver = false;
     this.score = 0;
     this.moveDownKeyActive = true;
@@ -17375,28 +17343,20 @@ class Game {
   }
 
   updateNextTetrad() {
-    // let nextTetradDiv = document.getElementById("next-tetrad");
     let nextTetrad = Tetrad.randomTetrads[Tetrad.randomTetrads.length - 1][0];
-    // nextTetradDiv.innerHTML = nextTetrad;
     Util.drawNextTetrad(nextTetrad);
   }
 
   removeNextTetrad() {
-    // let nextTetradDiv = document.getElementById("next-tetrad");
-    // let nextTetrad = Tetrad.randomTetrads[Tetrad.randomTetrads.length - 1][0];
-    // nextTetradDiv.innerHTML = nextTetrad;
     Util.undrawNextTetrad();
   }
 
   render() {
     this.newBoard.drawBoard();
     this.activeTetrad.drawTetrad();
-    // debugger
     this.updateScore();
     this.removeNextTetrad();
     this.updateNextTetrad();
-    // debugger
-    // this.animate();
   }
 
   collision(nextX, nextY, currentTetrad) {
@@ -17441,7 +17401,6 @@ class Game {
     }
 
     if (!this.collision(shift, 0, nextTetradRotation)) {
-      // debugger
       this.activeTetrad.removePrev();
       this.activeTetrad.xOffset += shift;
       this.activeTetrad.currentRotation = (this.activeTetrad.currentRotation + 1) % this.activeTetrad.tetrad.length;
@@ -17451,8 +17410,6 @@ class Game {
   }
 
   stackTetrad() {
-    // this.removeNextTetrad();
-    // this.updateNextTetrad();
     for (let i = 0; i < this.activeTetrad.currentTetrad.length; i++) {
       for (let j = 0; j < this.activeTetrad.currentTetrad.length; j++) {
         if (!this.activeTetrad.currentTetrad[i][j]) {
@@ -17463,12 +17420,9 @@ class Game {
           break;
         }
         if (this.activeTetrad.currentTetrad[i][j]) {
-          // debugger
           let idxJ = this.activeTetrad.xOffset + j;
           let idxI = this.activeTetrad.yOffset + i;
           this.newBoard.grid[idxI][idxJ] = "yellow";
-          // this.removeNextTetrad();
-          // this.updateNextTetrad();
         }
       }
     }
@@ -17487,12 +17441,10 @@ class Game {
         }
       }
       if (rowFull) {
-        // document.getElementById('t-body').click();
         $('#canvas').trigger("click");
         this.newBoard.grid = this.newBoard.grid.slice(0, i).concat(this.newBoard.grid.slice(i + 1));
         this.addEmptyRow();
         this.score += 10;
-        // let scoreBoard = document.getElementById("score");
         this.updateScore(this.score);
       }
     }
@@ -17502,9 +17454,7 @@ class Game {
     this.removeNextTetrad();
     this.updateNextTetrad();
     if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
-      // debugger
       this.activeTetrad.removePrev();
-      // this.activeTetrad.moveDown();
       this.activeTetrad.yOffset += 1;
       this.activeTetrad.drawTetrad();
     } else {
@@ -17516,14 +17466,8 @@ class Game {
   }
 
   moveUp() {
-    // this.activeTetrad.removePrev();
-    // this.activeTetrad.moveDown();
     this.activeTetrad.yOffset -= 1;
-    // this.activeTetrad.drawTetrad();
   }
-  
-
-
 
   tetradMoves(e) {
     e.preventDefault();
@@ -17534,33 +17478,28 @@ class Game {
           this.activeTetrad.moveLeft();
           this.activeTetrad.drawTetrad();
         }
-        // dropStart = Date.now();
-      break;
+        break;
       case 38:
         this.rotateTetrad1();
-        // dropStart = Date.now();
-      break;
+        break;
       case 39:
         if (!this.collision(1, 0, this.activeTetrad.currentTetrad)) {
           this.activeTetrad.removePrev();
           this.activeTetrad.moveRight();
           this.activeTetrad.drawTetrad();
         }
-        // dropStart = Date.now();
-      break;
+        break;
       case 40:
         if (this.moveDownKeyActive) {
           this.moveDown();
         }
         if (this.gameOver) {
-          // let tetrisCanvas = document.getElementsByClassName("tetris-canvas")[0];
-          // tetrisCanvas.classList.add("hide");
           this.moveDownKeyActive = false;
         }
-      break;
+        break;
       case 32:
         this.hardDrop();
-      break;
+        break;
     }
   }
 
@@ -17574,7 +17513,7 @@ class Game {
     let div = document.createElement("div");
     div.innerHTML = "GAME OVER";
     div.classList.add("game-over", "animated", "bounceInUp");
-    
+
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);
   }
@@ -17583,18 +17522,13 @@ class Game {
     let div = document.createElement("div");
     div.innerHTML = "GAME PAUSED";
     div.classList.add("game-paused", "animated", "zoomIn");
-    
+
     let tetrisCanvasDiv = document.getElementsByClassName("tetris-canvas")[0];
     tetrisCanvasDiv.appendChild(div);
   }
 
 }
 
-
-// const gameex = new Game();
-// window.gameex = gameex;
-// const x = new Game
-// window.x = x;
 module.exports = Game;
 
 //DELETE
@@ -17612,36 +17546,25 @@ module.exports = Game;
 /***/ (function(module, exports) {
 
 let steps = [
-              "OBJECTIVE: Try and score as many points as you can by clearing maximum number of lines. And if you make a skyscraper you are toast.",
-              "DIRECTION: Use the arrow keys to move and rotate the tetrads.",
-              "UP: Rotates the tetrads.",
-              "RIGTH: Moves the tetrads right.",
-              "LEFT: Moves the tetrads left.",
-              "DOWN: Moves the tetrads down.",
-              "SPACE: Hard Drop"
-            ];
-
-// for (let i = 0; i < steps.length; i++) {
-//   let step = steps[i];
-//   let ul = document.getElementById("friendsList");
-//   let li = document.createElement('li');
-//   li.appendChild(document.createTextNode(name));
-//   ul.appendChild(li);
-// }
-
-
+  "OBJECTIVE: Try and score as many points as you can by clearing maximum number of lines. And if you make a skyscraper you are toast.",
+  "DIRECTION: Use the arrow keys to move and rotate the tetrads.",
+  "UP: Rotates the tetrads.",
+  "RIGTH: Moves the tetrads right.",
+  "LEFT: Moves the tetrads left.",
+  "DOWN: Moves the tetrads down.",
+  "SPACE: Hard Drop"
+];
 
 function display() {
   let element = document.getElementById("gameDirections");
   let clicked = false;
   let count = 0;
   let instructions = document.createElement("div");
-  // instructions.innerHTML = "Game Directions";
   instructions.id = "gameDirections-text";
   let ul = document.createElement('ul');
   instructions.appendChild(ul);
   instructions.classList.add('animated', 'rollIn');
-  
+
   for (let i = 0; i < steps.length; i++) {
     let step = steps[i];
     let li = document.createElement('li');
@@ -17649,13 +17572,8 @@ function display() {
     ul.appendChild(li);
   }
 
-  // instructionstText.innerHTML = "Game Directions";
-  // instructions.id = "gameDirections-text";
-  // debugger
-
-   // 3. Add event handler
+  // 3. Add event handler
   element.addEventListener("click", function () {
-    // debugger
     if (count > 0) {
       document.getElementById('gameDirections-text').classList.remove('hide');
     }
@@ -17671,7 +17589,7 @@ function display() {
       count += 1;
     }
   });
-  
+
 }
 
 module.exports = display;
@@ -17688,19 +17606,13 @@ module.exports = display;
 const _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 const Game = __webpack_require__(/*! ./game */ "./src/game.js");
 const display = __webpack_require__(/*! ./how_to_play */ "./src/how_to_play.js");
-// const board = require('./board');
-// const tetrad = require('./tetrad');
-// const tetradBlocks = require("./tetrad_blocks");
-
 
 document.addEventListener("DOMContentLoaded", () => {
   display();
   let button = document.createElement("button");
   button.innerHTML = "Start Game";
   button.id = "startGame";
-  
 
-  // 2. Append somewhere
   let body = document.getElementsByClassName("tetris-canvas")[0];
   body.appendChild(button);
 
@@ -17715,24 +17627,19 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       newGame.gamePausedDisplay();
     }
-    // console.log(newGame.pause);
   });
 
-  
-
-  // 3. Add event handler
   button.addEventListener("click", function () {
-      // alert("did something");
     document.getElementById('startGame').classList.add('animated', 'zoomOutDown');
-    
+
     const newGame = new Game();
     //DELETE
-      window.newGame = newGame;
+    window.newGame = newGame;
     //DELETE
     newGame.render();
     document.addEventListener("keydown", newGame.tetradMoves);
 
-  
+
     let start = Date.now();
 
     function animate() {
@@ -17779,7 +17686,6 @@ document.addEventListener("DOMContentLoaded", () => {
           pauseButton.innerHTML = "Pause";
         }
         requestAnimationFrame(animate);
-        // debugger
       } else {
         cancelAnimationFrame(requestAnimationFrame(animate));
         let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
@@ -17787,25 +17693,11 @@ document.addEventListener("DOMContentLoaded", () => {
         newGame.gameOverDisplay();
         document.getElementById("pause-game").disabled = true;
       }
-
-      // if (!newGame.gameOver) {
-      //   // debugger
-      //   requestAnimationFrame(animate);
-      // } else {
-      //   cancelAnimationFrame(requestAnimationFrame(animate));
-      //   // alert("Game Over!");
-      //   let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
-      //   tetrisCanvas.classList.add("hide");
-      //   newGame.gameOverDisplay();
-      // }
     }
 
     window.requestAnimationFrame(animate);
-  });  
+  });
 });
-
-
-
 
 /***/ }),
 
@@ -17821,47 +17713,30 @@ const Util = __webpack_require__(/*! ./util */ "./src/util.js");
 const tetradBlocks = __webpack_require__(/*! ./tetrad_blocks */ "./src/tetrad_blocks.js");
 
 class Tetrad {
-  constructor(options={}) {
+  constructor(options = {}) {
     this.color = options.color || "yellow";
     this.xOffset = 4;
     this.yOffset = -3;
-    // this.randomTetrads = [];
-    // this.nexttetrad = this.getNextTetrad();
     this.tetrad = this.getNextTetrad();
-    // this.tetrad = options.tetrad;
     this.currentRotation = 0;
-    // this.currentTetrad = this.tetrad[1];
     this.currentTetrad = this.tetrad[this.currentRotation];
-    // this.moveDown = this.moveDown.bind(this);
   }
 
   getRandomTetrads() {
-    // let result = [];
     let tetrads = Object.keys(tetradBlocks);
-    // if (Tetrad.randomTetrads.length === 0) {
-      for (let i = 0; i < 3; i++) {
-        let randomtetrad = tetrads[Math.floor(Math.random() * tetrads.length)];
-        Tetrad.randomTetrads.unshift(tetradBlocks[randomtetrad]);
-      }
-    // }
+    for (let i = 0; i < 3; i++) {
+      let randomtetrad = tetrads[Math.floor(Math.random() * tetrads.length)];
+      Tetrad.randomTetrads.unshift(tetradBlocks[randomtetrad]);
+    }
   }
   getNextTetrad() {
     if (Tetrad.randomTetrads.length <= 1) {
-      // debugger
       this.getRandomTetrads();
     }
     return Tetrad.randomTetrads.pop();
   }
 
-
-  // getRandomTetrad() {
-  //   let tetrads = Object.keys(tetradBlocks);
-  //   let randomtetrad = tetrads[Math.floor(Math.random() * tetrads.length)];
-  //   return tetradBlocks[randomtetrad];
-  // }
-
   drawTetrad() {
-    // debugger
     for (let i = 0; i < this.currentTetrad.length; i++) {
       for (let j = 0; j < this.currentTetrad.length; j++) {
         if (this.currentTetrad[i][j]) {
@@ -17870,7 +17745,7 @@ class Tetrad {
       }
     }
   }
-  
+
   removePrev() {
     for (let i = 0; i < this.currentTetrad.length; i++) {
       for (let j = 0; j < this.currentTetrad.length; j++) {
@@ -17882,31 +17757,12 @@ class Tetrad {
   }
 
   moveRight() {
-    // if (!this.collision(1, 0)) {
     this.xOffset += 1;
-    // }
   }
 
   moveLeft() {
     this.xOffset -= 1;
   }
-
-//   moveDown() {
-//     if (!this.collision(0, 1, this.activeTetrad.currentTetrad)) {
-//       // debugger
-//       this.activeTetrad.removePrev();
-//       // this.activeTetrad.moveDown();
-//       this.yOffset += 1;
-//       this.activeTetrad.drawTetrad();
-//       // document.getElementById('t-body').click();
-//       // $('#t-body').trigger("click");
-//     } else {
-//       this.stackTetrad();
-//       this.rowStackFull();
-//       this.newBoard.drawBoard();
-//       this.activeTetrad = new Tetrad();
-//     }
-// }
 
   updateTimer(deltaTime, callback) {
     this.timer += deltaTime;
@@ -17916,22 +17772,11 @@ class Tetrad {
   }
 
   rotateTetrad() {
-    // debugger
     this.currentRotation = (this.currentRotation + 1) % this.tetrad.length;
     this.currentTetrad = this.tetrad[this.currentRotation];
   }
 
-//   rotateTetradOnCollision() {
-//     if (this.xOffset < 5) {
-//       this.moveRight();
-//     } else {
-//       this.moveLeft();
-//     }
-//   }
 }
-
-// const currtetrad = new Tetrad({color:"purple", tetrad: tetradBlocks.zBlock});
-// currtetrad.drawTetrad();
 
 //DELETE
 // window.Tetrad = Tetrad;
@@ -17940,7 +17785,6 @@ class Tetrad {
 Tetrad.randomTetrads = [];
 
 module.exports = Tetrad;
-
 
 /***/ }),
 
@@ -18156,8 +18000,6 @@ const Util = {
     c.lineDashOffset = 4;
     c.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
-    // c.clearRect(X, Y, 15, 15);
-    // c.strokeRect(X, Y, 25, 25);
   },
 
   drawUnitSquareTetrad(xOffset, yOffset, color) {
@@ -18198,29 +18040,25 @@ const Util = {
     cN.lineDashOffset = 4;
     cN.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     cN.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
-    // cN.clearRect(X, Y, 30, 30);
-    // cN.strokeRect(X, Y, 30, 30);
   },
 
-   drawNextTetrad(nextTetrad) {
-     for (let i = 0; i < nextTetrad.length; i++) {
-       for (let j = 0; j < nextTetrad.length; j++) {
-        //  debugger
-         if (nextTetrad[i][j]) {
-           this.drawUnitSquareTetradN(j, i, "yellow");
-         }
-       }
-     }
-   },
+  drawNextTetrad(nextTetrad) {
+    for (let i = 0; i < nextTetrad.length; i++) {
+      for (let j = 0; j < nextTetrad.length; j++) {
+        if (nextTetrad[i][j]) {
+          this.drawUnitSquareTetradN(j, i, "yellow");
+        }
+      }
+    }
+  },
 
-   undrawNextTetrad() {
-     for (let i = 0; i < 4; i++) {
-       for (let j = 0; j < 4; j++) {
-        //  debugger
-           this.drawUnitSquareTetradU(j, i, "black");
-       }
-     }
-   }
+  undrawNextTetrad() {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        this.drawUnitSquareTetradU(j, i, "black");
+      }
+    }
+  }
 };
 
 module.exports = Util;

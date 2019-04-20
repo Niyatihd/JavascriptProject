@@ -1,19 +1,13 @@
 const _ = require("lodash");
 const Game = require('./game');
 const display = require('./how_to_play');
-// const board = require('./board');
-// const tetrad = require('./tetrad');
-// const tetradBlocks = require("./tetrad_blocks");
-
 
 document.addEventListener("DOMContentLoaded", () => {
   display();
   let button = document.createElement("button");
   button.innerHTML = "Start Game";
   button.id = "startGame";
-  
 
-  // 2. Append somewhere
   let body = document.getElementsByClassName("tetris-canvas")[0];
   body.appendChild(button);
 
@@ -28,24 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       newGame.gamePausedDisplay();
     }
-    // console.log(newGame.pause);
   });
 
-  
-
-  // 3. Add event handler
   button.addEventListener("click", function () {
-      // alert("did something");
     document.getElementById('startGame').classList.add('animated', 'zoomOutDown');
-    
+
     const newGame = new Game();
     //DELETE
-      window.newGame = newGame;
+    window.newGame = newGame;
     //DELETE
     newGame.render();
     document.addEventListener("keydown", newGame.tetradMoves);
 
-  
+
     let start = Date.now();
 
     function animate() {
@@ -92,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
           pauseButton.innerHTML = "Pause";
         }
         requestAnimationFrame(animate);
-        // debugger
       } else {
         cancelAnimationFrame(requestAnimationFrame(animate));
         let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
@@ -100,21 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
         newGame.gameOverDisplay();
         document.getElementById("pause-game").disabled = true;
       }
-
-      // if (!newGame.gameOver) {
-      //   // debugger
-      //   requestAnimationFrame(animate);
-      // } else {
-      //   cancelAnimationFrame(requestAnimationFrame(animate));
-      //   // alert("Game Over!");
-      //   let tetrisCanvas = document.getElementsByClassName("tetris-canvas-board")[0];
-      //   tetrisCanvas.classList.add("hide");
-      //   newGame.gameOverDisplay();
-      // }
     }
 
     window.requestAnimationFrame(animate);
-  });  
+  });
 });
-
-

@@ -14,8 +14,6 @@ const Util = {
     c.lineDashOffset = 4;
     c.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     c.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
-    // c.clearRect(X, Y, 15, 15);
-    // c.strokeRect(X, Y, 25, 25);
   },
 
   drawUnitSquareTetrad(xOffset, yOffset, color) {
@@ -56,29 +54,25 @@ const Util = {
     cN.lineDashOffset = 4;
     cN.fillRect(X, Y, gridUnitSquare, gridUnitSquare);
     cN.strokeRect(X, Y, gridUnitSquare, gridUnitSquare);
-    // cN.clearRect(X, Y, 30, 30);
-    // cN.strokeRect(X, Y, 30, 30);
   },
 
-   drawNextTetrad(nextTetrad) {
-     for (let i = 0; i < nextTetrad.length; i++) {
-       for (let j = 0; j < nextTetrad.length; j++) {
-        //  debugger
-         if (nextTetrad[i][j]) {
-           this.drawUnitSquareTetradN(j, i, "yellow");
-         }
-       }
-     }
-   },
+  drawNextTetrad(nextTetrad) {
+    for (let i = 0; i < nextTetrad.length; i++) {
+      for (let j = 0; j < nextTetrad.length; j++) {
+        if (nextTetrad[i][j]) {
+          this.drawUnitSquareTetradN(j, i, "yellow");
+        }
+      }
+    }
+  },
 
-   undrawNextTetrad() {
-     for (let i = 0; i < 4; i++) {
-       for (let j = 0; j < 4; j++) {
-        //  debugger
-           this.drawUnitSquareTetradU(j, i, "black");
-       }
-     }
-   }
+  undrawNextTetrad() {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        this.drawUnitSquareTetradU(j, i, "black");
+      }
+    }
+  }
 };
 
 module.exports = Util;
